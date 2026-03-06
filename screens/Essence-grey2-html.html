@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "charcoal": "#121212",
+                        "off-white": "#F9F8F6",
+                        "accent": "#E5E1DA",
+                        "rose-gold": "#b76e79",
+                        "champagne": "#f7e7ce",
+                        "lavender-mist": "#e6e6fa"
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(40px, -60px) scale(1.1)' },
+                            '66%': { transform: 'translate(-30px, 30px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    },
+                    fontFamily: {
+                        display: ["Syncopate", "sans-serif"],
+                        body: ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #F9F8F6;
+            color: #121212;
+        }
+        h1, h2, h3, .heading-font {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        .text-extended {
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        .border-thin {
+            border-width: 0.5px;
+        }
+        .parallax-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* Animações de Entrada e Saída */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.9); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        .reveal-down { opacity: 0; transform: translateY(-40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-down.active { opacity: 1; transform: translateY(0); }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        @keyframes slowPan { 0% { transform: scale(1) translate(0,0); } 50% { transform: scale(1.05) translate(-1%, -1%); } 100% { transform: scale(1) translate(0,0); } }
+        .animate-slow-pan { animation: slowPan 30s ease-in-out infinite; }
+        @keyframes floatImage { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        .animate-float { animation: floatImage 8s ease-in-out infinite; }
+        @keyframes subtlePulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .animate-subtle-pulse { animation: subtlePulse 4s ease-in-out infinite; }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-charcoal selection:text-white">
+    <nav
+        class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-10 mix-blend-difference text-off-white reveal-down active">
+        <div
+            class="text-xl font-bold tracking-tighter hover:text-rose-gold transition-colors duration-500 cursor-pointer">
+            ESSENCE.</div>
+        <div class="hidden md:flex gap-12 text-[10px] text-extended">
+            <a class="hover:opacity-50 transition-opacity hover:text-rose-gold" href="#curation">Curadoria</a>
+            <a class="hover:opacity-50 transition-opacity hover:text-rose-gold" href="#vanguarda">Vanguarda</a>
+            <a class="hover:opacity-50 transition-opacity hover:text-rose-gold" href="#archives">Arquivos</a>
+            <a class="hover:opacity-50 transition-opacity hover:text-rose-gold" href="#contact">Contato</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="min-h-screen flex flex-col justify-end px-8 pt-32 pb-16 md:pb-24 relative overflow-hidden">
+            <div class="parallax-blob w-96 h-96 bg-champagne -top-20 -right-20 animate-blob"></div>
+            <div class="parallax-blob w-[500px] h-[500px] bg-rose-gold -bottom-20 -left-40 animate-blob"
+                style="animation-delay: 2s;"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end relative z-10">
+                <div class="md:col-span-8 reveal delay-100">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl leading-[0.9] mb-8 animate-pulse text-charcoal">
+                        A ARTE DE <br /><span class="text-rose-gold italic font-body">SER.</span>
+                    </h1>
+                </div>
+                <div class="md:col-span-4 flex flex-col items-start md:items-end text-left md:text-right">
+                    <p class="text-extended text-sm mb-8 max-w-xs text-charcoal/80 reveal delay-300">
+                        Uma síntese de precisão clínica e evolução <span
+                            class="text-rose-gold font-medium">estética.</span>
+                    </p>
+                    <button
+                        class="bg-charcoal text-off-white px-10 py-5 text-extended text-xs hover:bg-rose-gold hover:text-white border border-charcoal hover:border-rose-gold transition-all duration-500 reveal delay-500 shadow-xl hover:-translate-y-1">
+                        Reservar Consulta
+                    </button>
+                </div>
+            </div>
+            <div class="mt-24 h-[60vh] w-full bg-cover bg-fixed grayscale hover:grayscale-0 transition-all duration-1000 border-thin border-rose-gold/30 relative z-10 reveal-scale delay-200"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRUlKVb3ojNyz5yvGxuzwDZoApQ1hf0iUadOM4djQu6KXEIzZKGFvVOoWXXAvwvujqQC6KfvBSGfGpIrgqYI4UaMioJicCUEjiGTq2GlSMJ-I9wxVL6sbzQCaPYrUwibSJo7PnTE3rVAC67GuOpicFLXQWgCbhRTt2Z5pDRzEWFY_IrJy6pNpD9Fd4V7ykYRc7lGAFAgB18zqcDD7uQC4kjq6nZtC6KoAT8dU7zkkTqP5u6Z4mXiiZCEXxiU7sh337g2EDh0cv0NU");'>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 bg-charcoal text-off-white relative overflow-hidden">
+            <div class="parallax-blob w-80 h-80 bg-lavender-mist top-20 -left-20 animate-blob"
+                style="animation-delay: 1s; opacity: 0.15"></div>
+            <div class="parallax-blob w-96 h-96 bg-rose-gold bottom-0 -right-20 animate-blob"
+                style="animation-delay: 3s; opacity: 0.15"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10">
+                <span class="text-extended text-xs text-champagne block mb-12 reveal delay-100">01 — Manifesto</span>
+                <h2 class="text-3xl md:text-4xl leading-tight mb-20 text-off-white reveal delay-200">
+                    Não realizamos tratamentos. Fazemos a curadoria da <span
+                        class="text-champagne italic font-body">excelência biológica.</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                    <div
+                        class="aspect-[3/4] bg-accent/10 overflow-hidden border border-rose-gold/20 reveal-left delay-100">
+                        <img alt="Clinical Mastery"
+                            class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 hover:scale-105 animate-slow-pan"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmegra5NzPq_ZddodeA3vBNxyNcHDbVdYZi_OJRX7wPL9J5FRrLGiRPiMznGYiEYFx7Xp-galwkAocvti1SfYLPhiOG-FSBv-428Q_-8SZI7kGtYbMYTjyGH97kNynfEBpegtcTeH3FpDlUqwLg1yAefiScrONFNdNTNIGLjrRHpEsQHRBOC672aDb0BQ7RNubs-s88KuTHVWF-h0g_DDgs8pkuzBMEVMRMpf7emQ4EcmYMprRyAcumf3WKiwfumdITJzjgarXFbA" />
+                    </div>
+                    <div class="flex flex-col justify-center reveal-right delay-200">
+                        <p class="text-lg font-light leading-relaxed mb-8 text-off-white/80">
+                            A Essence Clinic está na interseção da ciência médica e da alta arte. Nossa metodologia
+                            rejeita o genérico, abraçando a arquitetura individual do seu rosto e corpo como uma
+                            <span class="text-champagne">obra-prima única.</span>
+                        </p>
+                        <div class="h-px w-24 bg-rose-gold/50 mb-8"></div>
+                        <p class="text-extended text-xs text-champagne">Vanguarda Clínica</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 relative overflow-hidden" id="curation">
+            <div class="parallax-blob w-[600px] h-[600px] bg-champagne top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-blob"
+                style="animation-delay: 0s;"></div>
+
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8 relative z-10">
+                <div class="reveal-right delay-100">
+                    <span class="text-extended text-xs text-rose-gold font-medium block mb-4">02 — A Coleção</span>
+                    <h2 class="text-4xl md:text-7xl text-charcoal">SOLUÇÕES <br /><span
+                            class="text-rose-gold italic font-body">CURADAS.</span></h2>
+                </div>
+                <p class="max-w-xs text-sm font-light leading-loose text-charcoal/70 reveal-left delay-200">
+                    Protocolos de precisão projetados para refinar e harmonizar. Cada intervenção é um toque deliberado
+                    de genialidade.
+                </p>
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-0.5 bg-charcoal border-thin border-charcoal overflow-hidden">
+                <div
+                    class="group relative bg-off-white p-12 h-[600px] flex flex-col justify-between overflow-hidden cursor-pointer reveal-scale delay-100">
+                    <div class="z-10 transition-transform duration-700 group-hover:-translate-y-4">
+                        <span class="text-extended text-[10px] mb-2 block">Arquivo. Facial</span>
+                        <h3 class="text-2xl mb-4 group-hover:text-rose-gold transition-colors duration-500">ESCULTURA
+                            <br />EPIDÉRMICA
+                        </h3>
+                    </div>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0">
+                        <img alt="Facial"
+                            class="w-full h-full object-cover grayscale transition-transform duration-[3s] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOtErFavZe_H1GJaDhmuLZ4vtNPJgPu3TMCm500XQWAScSOeGAaQSk7saa4SHHaq4CzbqGIeFx-GVY-5g4StOYGk1iiKYNPOJaFQQw3pxVhHlOofexETNJSw_BK0o98avnXefXDkfcnnSISY9AzJTv7CYZts1RVK9RPzP4lb_UZTEFNJUKK_Sf1hiTZlTeCXn-22F27gWTfz7m8g7qeCdOCwaMyPmJSPgnXMPXe5w8VbIJNSs5L2jn5bqs70p1uINK22cvrCVCwLE" />
+                        <div class="absolute inset-0 bg-charcoal/40 mix-blend-multiply"></div>
+                    </div>
+                    <div
+                        class="z-10 flex justify-between items-end transition-transform duration-700 group-hover:translate-y-2">
+                        <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity text-white font-medium">
+                            REFINANDO VOLUMES.</p>
+                        <span
+                            class="material-symbols-outlined text-4xl font-extralight group-hover:text-white transition-colors">add</span>
+                    </div>
+                </div>
+                <div
+                    class="group relative bg-off-white p-12 h-[600px] flex flex-col justify-between overflow-hidden cursor-pointer reveal-scale delay-300">
+                    <div class="z-10 transition-transform duration-700 group-hover:-translate-y-4">
+                        <span class="text-extended text-[10px] mb-2 block">Arquivo. Corporal</span>
+                        <h3 class="text-2xl mb-4 group-hover:text-rose-gold transition-colors duration-500">REFINAMENTO
+                            <br />ANATÔMICO
+                        </h3>
+                    </div>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0">
+                        <img alt="Body"
+                            class="w-full h-full object-cover grayscale transition-transform duration-[3s] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLLg9zCdbnHXS0wvxfPZKKCM_vukpFnWDhrolw2wiMhL2AI4wy_wGGfYx7OJr0uGkn9A2Ig1eso9mMA1x0RJhLrMCt1n9V6ZLujFnz0ywJV-FzIjgpaqLXmtiDolfTf3oHqUMdQ9m4KegXhYh8aZ2FtpmW5GUfrRGN7dE8JvihRuArj2-mSGexh6QGOGTFpO-glhloIM3CQNVML2QrTR81IwZ5hm7-JRCqda9YfntxW2aCgqF3K57_FGta-J3GUMwTkyfYvpb4i-k" />
+                        <div class="absolute inset-0 bg-charcoal/40 mix-blend-multiply"></div>
+                    </div>
+                    <div
+                        class="z-10 flex justify-between items-end transition-transform duration-700 group-hover:translate-y-2">
+                        <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity text-white font-medium">
+                            SIMETRIA ESTRUTURAL.</p>
+                        <span
+                            class="material-symbols-outlined text-4xl font-extralight group-hover:text-white transition-colors">add</span>
+                    </div>
+                </div>
+                <div
+                    class="group relative bg-off-white p-12 h-[600px] flex flex-col justify-between overflow-hidden cursor-pointer reveal-scale delay-500">
+                    <div class="z-10 transition-transform duration-700 group-hover:-translate-y-4">
+                        <span class="text-extended text-[10px] mb-2 block">Arquivo. Tecnologia</span>
+                        <h3 class="text-2xl mb-4 group-hover:text-rose-gold transition-colors duration-500">TERAPIA
+                            <br />FOTÔNICA
+                        </h3>
+                    </div>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0">
+                        <img alt="Tech"
+                            class="w-full h-full object-cover grayscale transition-transform duration-[3s] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk1DWIu0OlYEi8slWU2CvTbjJzFDRhsKI-U0paUS_qiZWTEsxHVmUiDnKfCAx5sS0ssccNtj_PH7XRh5zwm3QKwIeJR2MlBuGYm5xJK5UbuPi7-XAZcnoSnqBq_0-ACrqWWliAaq7n5hopIwFHhtaQufxDPtGCVx_eqNJstENv117giGaaGtdQmf0W5XFaKlU7I3Jh8ra42pkGJrFzVu7AVMZumIZwZDRiSqYqqhcpeIQNU0ERdJ2otom_xFtuwjBFJvkYxSaXjrw" />
+                        <div class="absolute inset-0 bg-charcoal/40 mix-blend-multiply"></div>
+                    </div>
+                    <div
+                        class="z-10 flex justify-between items-end transition-transform duration-700 group-hover:translate-y-2">
+                        <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity text-white font-medium">A
+                            LUZ COMO MEDICINA.</p>
+                        <span
+                            class="material-symbols-outlined text-4xl font-extralight group-hover:text-white transition-colors">add</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 border-y border-rose-gold/20 relative overflow-hidden" id="vanguarda">
+            <div class="parallax-blob w-80 h-80 bg-lavender-mist top-0 right-0 animate-blob opacity-30"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-32 relative z-10">
+                <div class="relative group reveal-left delay-100">
+                    <div
+                        class="absolute inset-0 bg-champagne/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none">
+                    </div>
+                    <img alt="Consultation"
+                        class="w-full grayscale border-thin border-charcoal/20 group-hover:grayscale-0 group-hover:scale-105 animate-slow-pan transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1jUpu8IWT4WeIihz1b8SPTCv_LQjKFgi82blatyFMJTEBIueKazHHOmapr_sSU0TcdEnXiXjZ8Jpe92tNBcgXQMmT-Bb9zzesFyQJWaKPdmSuqbNHz5xouSuNn24s-q412T1MyLqIxFYeEUhG7GMiUflh2elihx8Zk_99ISY7xPE3Zxql8-2UelFOF37k4eJDP65SR6rEB597rEhQvbmCjRUquZ08kxVAfmu4Mn9O6txUvhcrTdSQw2u4OZ1sg_4fEU4tBIqh-RE" />
+                    <div
+                        class="absolute -bottom-10 -right-10 bg-rose-gold text-white p-12 hidden lg:block z-20 shadow-2xl group-hover:scale-110 transition-transform duration-500 animate-float">
+                        <p class="text-5xl font-bold mb-2 text-champagne">10K+</p>
+                        <p class="text-extended text-[10px]">Jornadas Curadas</p>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-4xl mb-12 reveal-right delay-100">O Protocolo <br />Essence.</h2>
+                    <ul class="space-y-16">
+                        <li class="border-b border-charcoal/10 pb-8 group reveal-right delay-200 cursor-pointer">
+                            <span
+                                class="text-extended text-[10px] opacity-40 group-hover:text-rose-gold transition-colors">01.</span>
+                            <h4 class="text-xl mt-2 group-hover:translate-x-4 transition-transform duration-500">VERDADE
+                                ORGÂNICA</h4>
+                            <p
+                                class="mt-4 text-sm font-light text-charcoal/60 group-hover:text-charcoal transition-colors">
+                                Preservando a assinatura biométrica única de cada cliente.</p>
+                        </li>
+                        <li class="border-b border-charcoal/10 pb-8 group reveal-right delay-300 cursor-pointer">
+                            <span
+                                class="text-extended text-[10px] opacity-40 group-hover:text-rose-gold transition-colors">02.</span>
+                            <h4 class="text-xl mt-2 group-hover:translate-x-4 transition-transform duration-500">PADRÕES
+                                GLOBAIS</h4>
+                            <p
+                                class="mt-4 text-sm font-light text-charcoal/60 group-hover:text-charcoal transition-colors">
+                                Técnicas provenientes dos principais centros estéticos europeus.</p>
+                        </li>
+                        <li class="border-b border-charcoal/10 pb-8 group reveal-right delay-400 cursor-pointer">
+                            <span
+                                class="text-extended text-[10px] opacity-40 group-hover:text-rose-gold transition-colors">03.</span>
+                            <h4 class="text-xl mt-2 group-hover:translate-x-4 transition-transform duration-500">
+                                DISCRIÇÃO TOTAL</h4>
+                            <p
+                                class="mt-4 text-sm font-light text-charcoal/60 group-hover:text-charcoal transition-colors">
+                                Um ambiente projetado para a privacidade da elite.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 bg-off-white relative overflow-hidden" id="archives">
+            <div class="parallax-blob w-64 h-64 bg-rose-gold bottom-10 left-10 animate-blob opacity-20"
+                style="animation-delay: 1.5s;"></div>
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="flex justify-between items-center mb-32 reveal-down delay-100">
+                    <h2 class="text-4xl text-charcoal">Depoimentos.</h2>
+                    <div class="flex gap-4">
+                        <button
+                            class="size-12 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white transition-all hover:scale-110">
+                            <span class="material-symbols-outlined flex items-center justify-center">west</span>
+                        </button>
+                        <button
+                            class="size-12 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white transition-all hover:scale-110">
+                            <span
+                                class="material-symbols-outlined flex items-center justify-center animate-subtle-pulse">east</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+                    <div class="space-y-12 reveal-scale delay-100">
+                        <p
+                            class="text-3xl font-light leading-relaxed italic text-charcoal/80 transition-colors hover:text-charcoal">
+                            "Uma definição de luxo que vai <span class="text-rose-gold">além da superfície</span>. A
+                            Essence restaurou não apenas minha imagem, mas minha postura."
+                        </p>
+                        <div
+                            class="flex items-center gap-6 group hover:-translate-y-1 transition-transform cursor-pointer">
+                            <div
+                                class="size-16 grayscale group-hover:grayscale-0 bg-accent overflow-hidden rounded-full transition-all duration-500">
+                                <img alt="Patient" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5BkDG_H9q2RS90bmPTnOQWkoQdjDX88vaKS16Dp60_ACotK6Jy3YOk2Wiu_gGQwLETqkBsuqCMk6au09zLtvZq9WpRNhRlZJwwh_kaY5PHOecQ9uOsKWFTsM0trEyy0Kna47NvCUb-_BcAbhGq9WuFKemhirH-jZOxnEqIA34uykJWfjHhTa0yrUvh5rzympzKbpCDowynsvQXuxTJQmyzCDERdVsVsEehSxV7pPTCOMflo3dUqIeKiS0WOEl2tnU-OV8F5Y3cM" />
+                            </div>
+                            <div>
+                                <p
+                                    class="text-sm font-bold tracking-widest uppercase group-hover:text-rose-gold transition-colors">
+                                    Juliana M.</p>
+                                <p class="text-extended text-[10px] opacity-50">Membro Curadoria</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-12 reveal-scale delay-300">
+                        <p
+                            class="text-3xl font-light leading-relaxed italic text-charcoal/80 transition-colors hover:text-charcoal">
+                            "A precisão aqui é <span class="text-rose-gold">inigualável</span>. É excelência clínica
+                            envolta em uma atmosfera de galeria de arte."
+                        </p>
+                        <div
+                            class="flex items-center gap-6 group hover:-translate-y-1 transition-transform cursor-pointer">
+                            <div
+                                class="size-16 grayscale group-hover:grayscale-0 bg-accent overflow-hidden rounded-full transition-all duration-500">
+                                <img alt="Patient" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBGAbz7lekSVKjPElI7sYQw9uwOaaMZT2CDxS_6NviCX2hl7SobBO1szjFYyKoihx-iyws0sXD6HYNM_RHcoo7gvl8nK4dPWVyWKVf81Ad5QL60Ltq8GzdKLbLLc2CdPghXK3qwo3G8-Y1tXGORx4S53YMNljp5TcUbx_WLs1m_wzIhiRb1j2jwtMbLYqoFCgiZ3zUqQ-sO_KYevLtjpCBUqRmnilEcG2Ns5x-CD8d1ZWWtT4TquXnxSLzIYYdFwA4ID56hMaBno0" />
+                            </div>
+                            <div>
+                                <p
+                                    class="text-sm font-bold tracking-widest uppercase group-hover:text-rose-gold transition-colors">
+                                    Carla S.</p>
+                                <p class="text-extended text-[10px] opacity-50">Membro Curadoria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 bg-charcoal text-off-white relative overflow-hidden" id="planos">
+            <div class="parallax-blob w-[800px] h-[800px] bg-champagne top-0 left-1/2 -translate-x-1/2 animate-blob pointer-events-none"
+                style="opacity: 0.05"></div>
+            <div class="text-center mb-32 relative z-10 reveal delay-100">
+                <h2 class="text-5xl md:text-7xl mb-6"><span class="text-champagne font-body italic">NÍVEIS.</span></h2>
+                <p class="text-extended text-xs opacity-50">Evolução Estética Contínua</p>
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-0.5 bg-off-white/10 border border-off-white/10 max-w-7xl mx-auto">
+                <div
+                    class="bg-charcoal p-16 flex flex-col justify-between group hover:bg-off-white hover:text-charcoal transition-all duration-500 reveal-left delay-100">
+                    <div>
+                        <h3 class="text-xl mb-8 group-hover:text-rose-gold transition-colors">ESSENCIAL</h3>
+                        <div class="mb-12">
+                            <span class="text-6xl font-bold tracking-tighter">490</span>
+                            <span class="text-extended text-[10px] opacity-50">/mês</span>
+                        </div>
+                        <ul class="space-y-6 text-xs text-extended opacity-70 mb-16">
+                            <li>Manutenção Dérmica</li>
+                            <li>Análise Trimestral</li>
+                            <li>10% de Privilégio</li>
+                        </ul>
+                    </div>
+                    <button
+                        class="w-full py-5 border border-off-white group-hover:border-charcoal group-hover:bg-charcoal group-hover:text-off-white text-extended text-[10px] transition-all">Selecionar
+                        Plano</button>
+                </div>
+                <div
+                    class="bg-charcoal p-16 flex flex-col justify-between group hover:bg-off-white hover:text-charcoal transition-all duration-500 border-x border-off-white/10 reveal-scale delay-300 relative z-10 shadow-2xl scale-105 hover:scale-110">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-champagne text-charcoal px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest animate-subtle-pulse">
+                        Mais Procurado</div>
+                    <div>
+                        <h3 class="text-xl mb-8 group-hover:text-rose-gold transition-colors">EXCLUSIVO</h3>
+                        <div class="mb-12">
+                            <span
+                                class="text-6xl font-bold tracking-tighter text-champagne group-hover:text-charcoal">980</span>
+                            <span class="text-extended text-[10px] opacity-50">/mês</span>
+                        </div>
+                        <ul class="space-y-6 text-xs text-extended opacity-70 mb-16">
+                            <li>Rejuvenescimento Fotônico</li>
+                            <li>Skincare Personalizado</li>
+                            <li>20% de Privilégio</li>
+                        </ul>
+                    </div>
+                    <button
+                        class="w-full py-5 border border-off-white bg-champagne text-charcoal group-hover:bg-charcoal group-hover:text-off-white text-extended text-[10px] transition-all font-bold">Selecionar
+                        Plano</button>
+                </div>
+                <div
+                    class="bg-charcoal p-16 flex flex-col justify-between group hover:bg-off-white hover:text-charcoal transition-all duration-500 reveal-right delay-100">
+                    <div>
+                        <h3 class="text-xl mb-8 group-hover:text-rose-gold transition-colors">PRIME</h3>
+                        <div class="mb-12">
+                            <span class="text-6xl font-bold tracking-tighter">1850</span>
+                            <span class="text-extended text-[10px] opacity-50">/mês</span>
+                        </div>
+                        <ul class="space-y-6 text-xs text-extended opacity-70 mb-16">
+                            <li>Concierge 24h</li>
+                            <li>Escultura Corporal</li>
+                            <li>Curadoria Prioritária</li>
+                        </ul>
+                    </div>
+                    <button
+                        class="w-full py-5 border border-off-white group-hover:border-charcoal group-hover:bg-charcoal group-hover:text-off-white text-extended text-[10px] transition-all">Selecionar
+                        Plano</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-60 px-8 text-center bg-off-white relative overflow-hidden reveal-scale delay-100">
+            <div class="parallax-blob w-96 h-96 bg-rose-gold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-blob opacity-20 pointer-events-none"
+                style="animation-delay: 2s;"></div>
+            <h2
+                class="text-4xl md:text-8xl leading-none mb-16 relative z-10 text-charcoal hover:scale-105 transition-transform duration-700 cursor-default">
+                PRONTO PARA A <br /><span class="text-rose-gold italic font-body">EVOLUÇÃO?</span></h2>
+            <button
+                class="text-extended text-sm border-b-2 border-rose-gold pb-2 hover:text-rose-gold transition-colors relative z-10 hover:tracking-widest duration-500">
+                Agende Sua Avaliação
+            </button>
+        </section>
+    </main>
+
+    <footer class="bg-charcoal text-off-white px-8 py-24 border-t border-off-white/10" id="contact">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-24 mb-40">
+            <div class="col-span-1 md:col-span-1 reveal delay-100">
+                <h2 class="text-2xl font-bold mb-8 hover:text-rose-gold transition-colors cursor-pointer">ESSENCE.</h2>
+                <p class="text-xs text-extended opacity-50 leading-loose">
+                    Definindo o futuro da estética clínica através de uma lente de luxo absoluto.
+                </p>
+            </div>
+            <div class="reveal delay-200">
+                <h4 class="text-extended text-[10px] opacity-50 mb-10 group cursor-default">Arquivo</h4>
+                <ul class="space-y-4 text-sm font-light">
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">O Manifesto</a></li>
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Curadoria</a></li>
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Arquivos</a></li>
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="reveal delay-300">
+                <h4 class="text-extended text-[10px] opacity-50 mb-10 group cursor-default">Protocolos</h4>
+                <ul class="space-y-4 text-sm font-light">
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Escultura Dérmica</a></li>
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Refinamento Fotônico</a></li>
+                    <li><a class="hover:text-rose-gold transition-colors" href="#">Harmonia Anatômica</a></li>
+                </ul>
+            </div>
+            <div class="reveal delay-400">
+                <h4 class="text-extended text-[10px] opacity-50 mb-10">Contato</h4>
+                <p class="text-sm font-light mb-4 flex items-center gap-2"><span
+                        class="material-symbols-outlined text-sm text-rose-gold">location_on</span> Av. das Américas,
+                    5000 — RJ</p>
+                <p class="text-sm font-light mb-4 flex items-center gap-2"><span
+                        class="material-symbols-outlined text-sm text-rose-gold">call</span> +55 21 99888-7766</p>
+                <p
+                    class="text-sm font-light flex items-center gap-2 hover:text-rose-gold transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined text-sm text-rose-gold">mail</span> concierge@essence.com
+                </p>
+            </div>
+        </div>
+        <div
+            class="flex flex-col md:flex-row justify-between items-center text-[10px] text-extended opacity-30 gap-8 reveal delay-500">
+            <p>© 2024 ESSENCE CLINIC. TODOS OS DIREITOS RESERVADOS. Desenvolvido por <a
+                    href="https://reis-automacao-screens.vercel.app">Reis Automação</a></p>
+            <div class="flex gap-12">
+                <a class="hover:text-rose-gold transition-colors" href="#">INSTAGRAM</a>
+                <a class="hover:text-rose-gold transition-colors" href="#">VIMEO</a>
+                <a class="hover:text-rose-gold transition-colors" href="#">LINKEDIN</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-down').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

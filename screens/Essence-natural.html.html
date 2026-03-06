@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html class="" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { primary: "#efede7", "background-light": "#f7f7f7", "background-dark": "#1b1a17" }, fontFamily: { display: "Manrope" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" } } } };
+    </script>
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Animações de Entrada e Saída */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-down.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+
+        .delay-500 {
+            transition-delay: 500ms;
+        }
+
+        .delay-600 {
+            transition-delay: 600ms;
+        }
+
+        @keyframes slowPan {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.05) translate(-1%, -1%);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
+        .animate-slow-pan {
+            animation: slowPan 25s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: floatImage 8s ease-in-out infinite;
+        }
+
+        @keyframes subtlePulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-subtle-pulse {
+            animation: subtlePulse 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="sticky top-0 z-50 flex items-center justify-between border-b border-primary/20 bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4 reveal-down active">
+                <div class="flex items-center gap-2 group cursor-pointer">
+                    <span
+                        class="material-symbols-outlined text-primary text-3xl group-hover:rotate-180 transition-transform duration-1000 animate-subtle-pulse">spa</span>
+                    <h2 class="text-slate-100 text-xl font-bold tracking-tight">Essence Clinic</h2>
+                </div>
+                <nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+                    <div class="flex items-center gap-8">
+                        <a class="text-slate-100 hover:text-primary transition-colors text-sm font-medium"
+                            href="#tratamentos">Tratamentos</a>
+                        <a class="text-slate-100 hover:text-primary transition-colors text-sm font-medium"
+                            href="#diferenciais">Diferenciais</a>
+                        <a class="text-slate-100 hover:text-primary transition-colors text-sm font-medium"
+                            href="#depoimentos">Depoimentos</a>
+                        <a class="text-slate-100 hover:text-primary transition-colors text-sm font-medium"
+                            href="#planos">Planos</a>
+                    </div>
+                    <button
+                        class="bg-primary hover:bg-primary/90 text-background-dark px-6 py-2.5 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
+                        Agendar consulta
+                    </button>
+                </nav>
+            </header>
+
+            <main class="flex flex-col">
+                <section class="relative @container px-4 md:px-10 py-6">
+                    <div class="flex min-h-[600px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-center px-8 md:px-20 overflow-hidden"
+                        data-alt="Luxurious aesthetic clinic interior with soft warm lighting"
+                        style='background-image: linear-gradient(to right, rgba(33, 29, 17, 0.9) 20%, rgba(33, 29, 17, 0.2) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRUlKVb3ojNyz5yvGxuzwDZoApQ1hf0iUadOM4djQu6KXEIzZKGFvVOoWXXAvwvujqQC6KfvBSGfGpIrgqYI4UaMioJicCUEjiGTq2GlSMJ-I9wxVL6sbzQCaPYrUwibSJo7PnTE3rVAC67GuOpicFLXQWgCbhRTt2Z5pDRzEWFY_IrJy6pNpD9Fd4V7ykYRc7lGAFAgB18zqcDD7uQC4kjq6nZtC6KoAT8dU7zkkTqP5u6Z4mXiiZCEXxiU7sh337g2EDh0cv0NU");'>
+                        <div class="max-w-2xl flex flex-col gap-6 z-10">
+                            <h1
+                                class="text-white text-4xl md:text-6xl font-extrabold leading-tight tracking-tight reveal delay-100 text-shadow-lg">
+                                Realce sua beleza natural com ciência e cuidado</h1>
+                            <p class="text-slate-200 text-lg md:text-xl font-light leading-relaxed reveal delay-300">
+                                Excelência em estética avançada para mulheres que buscam resultados naturais,
+                                sofisticados e personalizados em um ambiente de luxo.
+                            </p>
+                            <div class="flex gap-4 reveal delay-500">
+                                <button
+                                    class="bg-primary hover:bg-primary/90 text-background-dark px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg hover:shadow-primary/20">
+                                    Agendar consulta
+                                </button>
+                                <button
+                                    class="border border-primary/50 text-primary hover:bg-primary/10 px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1">
+                                    Conhecer clínica
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-20 bg-background-dark">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        <div class="flex flex-col gap-6 order-2 lg:order-1">
+                            <h2
+                                class="text-primary text-3xl md:text-5xl font-bold leading-tight reveal-right delay-100">
+                                Transformação visual com precisão tecnológica
+                            </h2>
+                            <div class="h-1 w-20 bg-primary rounded-full reveal-right delay-200"></div>
+                            <p
+                                class="text-slate-300 text-lg md:text-xl font-light leading-relaxed reveal-right delay-300">
+                                Acompanhe de perto a revolução em tratamentos estéticos. Utilizando mapeamento 3D e
+                                protocolos avançados, analisamos a estrutura do seu rosto para proporcionar resultados
+                                extremamente naturais e harmônicos.
+                            </p>
+                            <ul class="space-y-5 mt-4">
+                                <li class="flex items-start gap-4 reveal-right delay-400">
+                                    <div
+                                        class="bg-primary/20 p-1.5 rounded-lg text-primary mt-1 group-hover:bg-primary transition-colors">
+                                        <span class="material-symbols-outlined text-lg">view_in_ar</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white text-lg">Mapeamento Facial</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Análise minuciosa de simetria e volume
+                                            para guiar cada procedimento.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4 reveal-right delay-500">
+                                    <div
+                                        class="bg-primary/20 p-1.5 rounded-lg text-primary mt-1 group-hover:bg-primary transition-colors">
+                                        <span class="material-symbols-outlined text-lg">science</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white text-lg">Protocolos Seguros</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Tecnologias aprovadas mundialmente e
+                                            aplicadas por especialistas.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="mt-6 reveal-right delay-600">
+                                <button
+                                    class="bg-primary hover:bg-primary/90 text-background-dark px-8 py-4 rounded-lg text-base font-bold transition-all shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
+                                    Agendar avaliação
+                                </button>
+                            </div>
+                        </div>
+                        <div id="hero-animation-container"
+                            class="relative flex items-center justify-center bg-primary/10 rounded-2xl overflow-hidden aspect-[4/5] w-full shadow-2xl border border-primary/20 order-1 lg:order-2 reveal-scale delay-200">
+                            <!-- Alta performance renderizando em Canvas -->
+                            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover"></canvas>
+                            <!-- Indicador de carregamento que só sai depois que as 80 pesadas fotos carregam -->
+                            <div id="loading-indicator"
+                                class="absolute inset-0 flex flex-col items-center justify-center bg-background-dark/90 backdrop-blur-md z-40 transition-opacity duration-1000">
+                                <span
+                                    class="material-symbols-outlined text-primary text-5xl animate-spin mb-4">settings</span>
+                                <div class="text-primary text-sm font-bold tracking-widest uppercase">Preparando
+                                    animação</div>
+                                <div class="w-48 h-1 bg-primary/20 rounded-full mt-4 overflow-hidden">
+                                    <div id="loading-bar"
+                                        class="h-full bg-primary rounded-full w-0 transition-all duration-300"></div>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-50 pointer-events-none">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-24 bg-background-light dark:bg-[#1a170d]" id="diferenciais">
+                    <div class="mb-16 reveal delay-100">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos Diferenciais</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">Tecnologia de ponta e
+                            atendimento humanizado para sua melhor versão, garantindo segurança e sofisticação em cada
+                            detalhe.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div
+                            class="group p-8 rounded-2xl bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/10 hover:border-primary transition-all shadow-sm reveal-scale delay-100">
+                            <div
+                                class="size-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">verified_user</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Corpo Clínico Especialista</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Doutoras renomadas com
+                                especialização internacional e atualização constante nas últimas técnicas mundiais.</p>
+                        </div>
+                        <div
+                            class="group p-8 rounded-2xl bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/10 hover:border-primary transition-all shadow-sm reveal-scale delay-300">
+                            <div
+                                class="size-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">precision_manufacturing</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Tecnologia Ultra-Moderna</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Equipamentos de última geração
+                                aprovados pela ANVISA, garantindo resultados precisos e recuperação acelerada.</p>
+                        </div>
+                        <div
+                            class="group p-8 rounded-2xl bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/10 hover:border-primary transition-all shadow-sm reveal-scale delay-500">
+                            <div
+                                class="size-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">favorite</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Atendimento Premium</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Protocolos exclusivos
+                                desenhados para suas necessidades, em um ambiente privado e acolhedor pensado para você.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-24 bg-background-dark" id="tratamentos">
+                    <div class="text-center mb-16 reveal delay-100">
+                        <h2 class="text-slate-100 text-3xl md:text-5xl font-extrabold mb-6">Tratamentos Exclusivos</h2>
+                        <p class="text-slate-400 text-lg max-w-3xl mx-auto">Soluções integradas para face e corpo,
+                            unindo tecnologia médica com um olhar artístico para a beleza.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="relative group h-[400px] overflow-hidden rounded-2xl reveal-scale delay-100">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                                data-alt="Facial aesthetic treatment with professional products"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBOtErFavZe_H1GJaDhmuLZ4vtNPJgPu3TMCm500XQWAScSOeGAaQSk7saa4SHHaq4CzbqGIeFx-GVY-5g4StOYGk1iiKYNPOJaFQQw3pxVhHlOofexETNJSw_BK0o98avnXefXDkfcnnSISY9AzJTv7CYZts1RVK9RPzP4lb_UZTEFNJUKK_Sf1hiTZlTeCXn-22F27gWTfz7m8g7qeCdOCwaMyPmJSPgnXMPXe5w8VbIJNSs5L2jn5bqs70p1uINK22cvrCVCwLE");'>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-2xl font-bold text-white mb-2">Estética Facial</h3>
+                                <p
+                                    class="text-slate-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    Harmonização, toxina botulínica e bioestimuladores de colágeno.</p>
+                                <a class="text-primary font-bold flex items-center gap-2" href="#">Saiba mais <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                            </div>
+                        </div>
+                        <div class="relative group h-[400px] overflow-hidden rounded-2xl reveal-scale delay-300">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                                data-alt="Woman receiving a body wellness massage"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLLg9zCdbnHXS0wvxfPZKKCM_vukpFnWDhrolw2wiMhL2AI4wy_wGGfYx7OJr0uGkn9A2Ig1eso9mMA1x0RJhLrMCt1n9V6ZLujFnz0ywJV-FzIjgpaqLXmtiDolfTf3oHqUMdQ9m4KegXhYh8aZ2FtpmW5GUfrRGN7dE8JvihRuArj2-mSGexh6QGOGTFpO-glhloIM3CQNVML2QrTR81IwZ5hm7-JRCqda9YfntxW2aCgqF3K57_FGta-J3GUMwTkyfYvpb4i-k");'>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-2xl font-bold text-white mb-2">Escultura Corporal</h3>
+                                <p
+                                    class="text-slate-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    Tecnologias para gordura localizada, flacidez e definição muscular.</p>
+                                <a class="text-primary font-bold flex items-center gap-2" href="#">Saiba mais <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                            </div>
+                        </div>
+                        <div class="relative group h-[400px] overflow-hidden rounded-2xl reveal-scale delay-500">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                                data-alt="Advanced dermatological light therapy device"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDk1DWIu0OlYEi8slWU2CvTbjJzFDRhsKI-U0paUS_qiZWTEsxHVmUiDnKfCAx5sS0ssccNtj_PH7XRh5zwm3QKwIeJR2MlBuGYm5xJK5UbuPi7-XAZcnoSnqBq_0-ACrqWWliAaq7n5hopIwFHhtaQufxDPtGCVx_eqNJstENv117giGaaGtdQmf0W5XFaKlU7I3Jh8ra42pkGJrFzVu7AVMZumIZwZDRiSqYqqhcpeIQNU0ERdJ2otom_xFtuwjBFJvkYxSaXjrw");'>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-2xl font-bold text-white mb-2">Dermatologia</h3>
+                                <p
+                                    class="text-slate-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    Tratamentos para manchas, acne, melasma e rejuvenescimento a laser.</p>
+                                <a class="text-primary font-bold flex items-center gap-2" href="#">Saiba mais <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section
+                    class="px-6 md:px-20 py-24 bg-background-light dark:bg-background-dark flex flex-col md:flex-row items-center gap-16">
+                    <div class="flex-1">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 reveal-right delay-100">Por que escolher a
+                            Essence Clinic?</h2>
+                        <ul class="space-y-6">
+                            <li class="flex gap-4 items-start reveal-right delay-200">
+                                <div class="bg-primary/20 p-2 rounded-lg text-primary">
+                                    <span class="material-symbols-outlined">auto_awesome</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Resultados Naturais</h4>
+                                    <p class="text-slate-600 dark:text-slate-400">Nossa filosofia foca em realçar sua
+                                        beleza, nunca em transformar artificialmente.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start reveal-right delay-300">
+                                <div class="bg-primary/20 p-2 rounded-lg text-primary">
+                                    <span class="material-symbols-outlined">workspace_premium</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Certificação Internacional</h4>
+                                    <p class="text-slate-600 dark:text-slate-400">Ambiente e protocolos que seguem os
+                                        mais altos padrões de qualidade europeus.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start reveal-right delay-400">
+                                <div class="bg-primary/20 p-2 rounded-lg text-primary">
+                                    <span class="material-symbols-outlined">health_and_safety</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Segurança Médica</h4>
+                                    <p class="text-slate-600 dark:text-slate-400">Todos os procedimentos são realizados
+                                        por médicos e monitorados rigorosamente.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 relative reveal-scale delay-200">
+                        <div class="aspect-square rounded-full border-4 border-primary/20 p-4">
+                            <div class="w-full h-full rounded-full bg-cover bg-center overflow-hidden transition-transform duration-700 hover:scale-105"
+                                data-alt="Doctor interacting with a patient in a consultation room"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1jUpu8IWT4WeIihz1b8SPTCv_LQjKFgi82blatyFMJTEBIueKazHHOmapr_sSU0TcdEnXiXjZ8Jpe92tNBcgXQMmT-Bb9zzesFyQJWaKPdmSuqbNHz5xouSuNn24s-q412T1MyLqIxFYeEUhG7GMiUflh2elihx8Zk_99ISY7xPE3Zxql8-2UelFOF37k4eJDP65SR6rEB597rEhQvbmCjRUquZ08kxVAfmu4Mn9O6txUvhcrTdSQw2u4OZ1sg_4fEU4tBIqh-RE");'>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -left-6 bg-primary p-6 rounded-2xl shadow-xl max-w-[200px] animate-float">
+                            <p class="text-background-dark font-black text-4xl mb-1">+10k</p>
+                            <p class="text-background-dark text-sm font-bold leading-tight">Vidas transformadas com
+                                nossa metodologia</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-24 bg-[#1a170d]" id="depoimentos">
+                    <div class="text-center mb-16 reveal delay-100">
+                        <span class="text-primary font-bold tracking-widest uppercase text-sm">Histórias de
+                            Sucesso</span>
+                        <h2 class="text-white text-3xl md:text-5xl font-bold mt-2">O que nossas pacientes dizem</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div
+                            class="bg-background-dark p-8 rounded-2xl border border-primary/10 relative reveal-scale delay-100 transition-all hover:-translate-y-2 hover:border-primary/30 shadow-lg">
+                            <span
+                                class="material-symbols-outlined text-primary/30 text-6xl absolute top-4 right-8 select-none animate-subtle-pulse">format_quote</span>
+                            <div class="flex gap-1 text-primary mb-6">
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                            </div>
+                            <p class="text-slate-300 italic mb-8 leading-relaxed relative z-10">"A Essence Clinic mudou
+                                minha
+                                percepção sobre estética. O resultado da minha harmonização ficou tão sutil que as
+                                pessoas dizem que estou mais descansada, exatamente o que eu queria."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/50"
+                                    data-alt="Satisfied female patient portrait"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDh5BkDG_H9q2RS90bmPTnOQWkoQdjDX88vaKS16Dp60_ACotK6Jy3YOk2Wiu_gGQwLETqkBsuqCMk6au09zLtvZq9WpRNhRlZJwwh_kaY5PHOecQ9uOsKWFTsM0trEyy0Kna47NvCUb-_BcAbhGq9WuFKemhirH-jZOxnEqIA34uykJWfjHhTa0yrUvh5rzympzKbpCDowynsvQXuxTJQmyzCDERdVsVsEehSxV7pPTCOMflo3dUqIeKiS0WOEl2tnU-OV8F5Y3cM");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-white">Juliana Moraes</p>
+                                    <p class="text-xs text-primary">Empresária</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-background-dark p-8 rounded-2xl border border-primary/10 relative reveal-scale delay-300 transition-all hover:-translate-y-2 hover:border-primary/30 shadow-lg">
+                            <span
+                                class="material-symbols-outlined text-primary/30 text-6xl absolute top-4 right-8 select-none animate-subtle-pulse">format_quote</span>
+                            <div class="flex gap-1 text-primary mb-6">
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                            </div>
+                            <p class="text-slate-300 italic mb-8 leading-relaxed relative z-10">"O atendimento é
+                                impecável desde a
+                                recepção até o pós-procedimento. A tecnologia que usam é surreal, não senti dor nenhuma
+                                no tratamento a laser."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/50"
+                                    data-alt="Happy young woman in clinical setting"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBGAbz7lekSVKjPElI7sYQw9uwOaaMZT2CDxS_6NviCX2hl7SobBO1szjFYyKoihx-iyws0sXD6HYNM_RHcoo7gvl8nK4dPWVyWKVf81Ad5QL60Ltq8GzdKLbLLc2CdPghXK3qwo3G8-Y1tXGORx4S53YMNljp5TcUbx_WLs1m_wzIhiRb1j2jwtMbLYqoFCgiZ3zUqQ-sO_KYevLtjpCBUqRmnilEcG2Ns5x-CD8d1ZWWtT4TquXnxSLzIYYdFwA4ID56hMaBno0");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-white">Carla Silveira</p>
+                                    <p class="text-xs text-primary">Advogada</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-background-dark p-8 rounded-2xl border border-primary/10 relative reveal-scale delay-500 transition-all hover:-translate-y-2 hover:border-primary/30 shadow-lg">
+                            <span
+                                class="material-symbols-outlined text-primary/30 text-6xl absolute top-4 right-8 select-none animate-subtle-pulse">format_quote</span>
+                            <div class="flex gap-1 text-primary mb-6">
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                                <span class="material-symbols-outlined fill-1">star</span>
+                            </div>
+                            <p class="text-slate-300 italic mb-8 leading-relaxed relative z-10">"Sempre tive receio de
+                                tratamentos
+                                invasivos. Na Essence, me explicaram tudo com base científica e me passaram muita
+                                segurança. Recomendo de olhos fechados."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/50"
+                                    data-alt="Portrait of a woman with radiant skin"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDeFLL1oovpgZnfxUGteQqrq_CadMvkiLK7j69LgOSDPkKJ2tromgHY0KWd4fd611V3TO7QkavIKWuQOrEfLb-iaeW80drff9nfp89fsuy3JD_8yg0KOfzOA9PVrJZkyIYwrXUCH1Mn2oDyat7WtSleeDST7XHjes6zxE2PKTgs_3adYk0MEyQV9ybdg-sD461Wxcb1zM1Ygr3_fsffQ1di32DHqqEEf1afI9sM2PCX9sGIvolE6EJBaV_PTaPaMb8r7Q46XsB2k24");'>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-white">Fernanda Costa</p>
+                                    <p class="text-xs text-primary">Arquiteta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-24 bg-background-light dark:bg-background-dark" id="planos">
+                    <div class="text-center mb-16 reveal delay-100">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">Planos de Acompanhamento</h2>
+                        <p class="text-slate-600 dark:text-slate-400">Manter sua beleza requer constância. Escolha o
+                            plano que melhor se adapta à sua rotina.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div
+                            class="bg-white dark:bg-[#1a170d] p-8 rounded-2xl border border-slate-200 dark:border-primary/10 flex flex-col reveal-left delay-100 hover:-translate-y-2 transition-transform shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">Essencial</h3>
+                            <div class="mb-6">
+                                <span class="text-4xl font-black">R$ 490</span><span class="text-slate-500">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                    Limpeza de pele profunda mensal</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                    Avaliação dermatológica trimestral</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> 10%
+                                    OFF em procedimentos avulsos</li>
+                            </ul>
+                            <button
+                                class="w-full py-3 rounded-lg border border-primary text-primary font-bold hover:bg-primary/10 transition-all">Assinar
+                                agora</button>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-[#1a170d] p-8 rounded-2xl border-2 border-primary relative flex flex-col scale-105 shadow-2xl reveal-scale delay-300 hover:scale-110 transition-transform">
+                            <div
+                                class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-background-dark px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest animate-subtle-pulse">
+                                Mais Escolhido</div>
+                            <h3 class="text-xl font-bold mb-2">Exclusive</h3>
+                            <div class="mb-6">
+                                <span class="text-4xl font-black">R$ 980</span><span class="text-slate-500">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> Todos
+                                    os benefícios do Essencial</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> 1
+                                    Sessão mensal de Laser Rejuvenescimento</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                    Protocolo Skincare personalizado incluso</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> 20%
+                                    OFF em procedimentos avulsos</li>
+                            </ul>
+                            <button
+                                class="w-full py-3 rounded-lg bg-primary text-background-dark font-bold hover:bg-primary/90 transition-all">Assinar
+                                agora</button>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-[#1a170d] p-8 rounded-2xl border border-slate-200 dark:border-primary/10 flex flex-col reveal-right delay-100 hover:-translate-y-2 transition-transform shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">Prime Luxury</h3>
+                            <div class="mb-6">
+                                <span class="text-4xl font-black">R$ 1.850</span><span
+                                    class="text-slate-500">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> Todos
+                                    os benefícios do Exclusive</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                    Acompanhamento médico VIP 24h</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span> 2
+                                    Sessões mensais de Body Sculpt</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                    Prioridade máxima em agendamentos</li>
+                            </ul>
+                            <button
+                                class="w-full py-3 rounded-lg border border-primary text-primary font-bold hover:bg-primary/10 transition-all">Assinar
+                                agora</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-6 md:px-20 py-20 bg-primary/10">
+                    <div
+                        class="max-w-4xl mx-auto bg-background-dark rounded-3xl p-10 md:p-16 text-center border border-primary/20 shadow-2xl overflow-hidden relative reveal-scale delay-100">
+                        <div
+                            class="absolute -top-24 -right-24 size-64 bg-primary/20 rounded-full blur-3xl animate-float">
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-black text-white mb-6 relative z-10">Pronta para sua melhor
+                            versão?</h2>
+                        <p class="text-slate-400 text-lg mb-10 relative z-10">Agende sua primeira avaliação
+                            personalizada e descubra o protocolo ideal para realçar sua essência.</p>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-background-dark px-10 py-5 rounded-xl text-xl font-black transition-all transform hover:scale-105 relative z-10 shadow-lg shadow-primary/20">
+                            Agendar minha consulta
+                        </button>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="bg-background-dark text-slate-400 border-t border-primary/10 px-6 md:px-20 pt-20 pb-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 md:col-span-1 reveal delay-100">
+                        <div class="flex items-center gap-2 text-white mb-6 group cursor-pointer">
+                            <span
+                                class="material-symbols-outlined text-primary text-3xl group-hover:rotate-180 transition-transform duration-1000">spa</span>
+                            <h2 class="text-xl font-bold tracking-tight">Essence Clinic</h2>
+                        </div>
+                        <p class="text-sm leading-relaxed mb-6">Elevando a autoestima através da ciência e tecnologia
+                            estética de ponta. Sua beleza, nossa essência.</p>
+                        <div class="flex gap-4">
+                            <a class="size-10 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-background-dark hover:scale-110 transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-xl">camera</span>
+                            </a>
+                            <a class="size-10 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-background-dark hover:scale-110 transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-xl">social_leaderboard</span>
+                            </a>
+                            <a class="size-10 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-background-dark hover:scale-110 transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-xl">share</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="reveal delay-200">
+                        <h4 class="text-white font-bold mb-6">Links Rápidos</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#">Tratamentos</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Sobre Nós</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Depoimentos</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="reveal delay-300">
+                        <h4 class="text-white font-bold mb-6">Tratamentos</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#">Estética Facial</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Lipo sem cortes</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Dermatologia</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Nutrologia</a></li>
+                        </ul>
+                    </div>
+                    <div class="reveal delay-400">
+                        <h4 class="text-white font-bold mb-6">Contato</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-sm mt-0.5">location_on</span>
+                                <span>Av. das Américas, 5000 - Barra da Tijuca, RJ</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary text-sm">call</span>
+                                <span>(21) 99888-7766</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary text-sm">mail</span>
+                                <span>contato@essenceclinic.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-primary/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs reveal delay-500">
+                    <p>© 2024 Essence Clinic. Todos os direitos reservados. desenvolvido por <a
+                            href="https://reis-automacao-screens.vercel.app">Reis Automação</a></p>
+                    <div class="flex gap-6">
+                        <a class="hover:text-primary transition-colors" href="#">Termos de Uso</a>
+                        <a class="hover:text-primary transition-colors" href="#">Privacidade</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer para animações
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-down').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Código da animação do Canvas
+            const canvas = document.getElementById('hero-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                const loadingIndicator = document.getElementById('loading-indicator');
+                const loadingBar = document.getElementById('loading-bar');
+
+                const totalFrames = 80;
+                const fps = 15;
+                const frameInterval = 1000 / fps;
+
+                const images = new Array(totalFrames);
+                let loadedCount = 0;
+                let currentFrame = 0;
+                let lastDrawTime = 0;
+
+                canvas.width = 1080;
+                canvas.height = 1350;
+
+                function drawFrame(frameIndex) {
+                    const img = images[frameIndex];
+                    if (!img) return;
+
+                    const canvasRatio = canvas.width / canvas.height;
+                    const imgRatio = img.width / img.height;
+
+                    let drawWidth = canvas.width;
+                    let drawHeight = canvas.height;
+                    let offsetX = 0;
+                    let offsetY = 0;
+
+                    if (imgRatio > canvasRatio) {
+                        drawWidth = canvas.height * imgRatio;
+                        offsetX = (canvas.width - drawWidth) / 2;
+                    } else {
+                        drawHeight = canvas.width / imgRatio;
+                        offsetY = (canvas.height - drawHeight) / 2;
+                    }
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                }
+
+                function animate(timestamp) {
+                    if (!lastDrawTime) lastDrawTime = timestamp;
+                    const elapsed = timestamp - lastDrawTime;
+
+                    if (elapsed >= frameInterval) {
+                        drawFrame(currentFrame);
+                        currentFrame = (currentFrame + 1) % totalFrames;
+                        lastDrawTime = timestamp - (elapsed % frameInterval);
+                    }
+                    requestAnimationFrame(animate);
+                }
+
+                function preloadImages() {
+                    for (let i = 0; i < totalFrames; i++) {
+                        const img = new Image();
+                        const frameNum = String(i).padStart(3, '0');
+
+                        img.onload = () => {
+                            loadedCount++;
+                            if (loadingBar) {
+                                loadingBar.style.width = `${(loadedCount / totalFrames) * 100}%`;
+                            }
+
+                            if (i === 0) {
+                                drawFrame(0);
+                            }
+
+                            if (loadedCount === totalFrames) {
+                                if (loadingIndicator) {
+                                    loadingIndicator.style.opacity = '0';
+                                    setTimeout(() => loadingIndicator.remove(), 1000);
+                                }
+                                requestAnimationFrame(animate);
+                            }
+                        };
+
+                        img.src = `../Section_hero/Flow_delpmaspu__000/Flow_delpmaspu__${frameNum}.jpg`;
+                        images[i] = img;
+                    }
+                }
+
+                preloadImages();
+            }
+        });
+    </script>
+</body>
+
+</html>

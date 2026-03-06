@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tenor+Sans&family=Montserrat:wght@200;300;400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <title>Essence Clinic - A Arte da Estética Médica</title>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: "#06302a",
+                        gold: "#c5a059",
+                        "gold-light": "#e2c99a",
+                        onyx: "#0a0a0a",
+                        pearl: "#fdfcf8"
+                    },
+                    fontFamily: {
+                        serif: ["Playfair Display", "serif"],
+                        display: ["Tenor Sans", "sans-serif"],
+                        sans: ["Montserrat", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-onyx text-pearl font-sans selection:bg-gold selection:text-onyx;
+            }
+            h1, h2, h3, h4 {
+                @apply font-serif tracking-tighter italic;
+            }
+        }
+        .grayscale-image {
+            filter: grayscale(100%) contrast(120%);
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        /* Animações de Entrada e Saída */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .reveal-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-down.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        /* Movimentos Contínuos de Imagem e Destaques */
+        @keyframes slowPan {
+            0% { transform: scale(1) translate(0,0); }
+            50% { transform: scale(1.05) translate(-1%, -1%); }
+            100% { transform: scale(1) translate(0,0); }
+        }
+        .animate-slow-pan {
+            animation: slowPan 25s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: floatImage 8s ease-in-out infinite;
+        }
+
+        @keyframes subtlePulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        .animate-subtle-pulse {
+            animation: subtlePulse 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+    <header
+        class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-8 md:px-16 py-8 mix-blend-difference reveal-down active">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl font-display uppercase tracking-[0.3em] text-pearl">Essence</span>
+        </div>
+        <nav class="hidden lg:flex gap-12 items-center">
+            <a class="text-[10px] uppercase tracking-[0.4em] hover:text-gold transition-colors"
+                href="#artistry">Manifesto</a>
+            <a class="text-[10px] uppercase tracking-[0.4em] hover:text-gold transition-colors"
+                href="#collection">Tratamentos</a>
+            <a class="text-[10px] uppercase tracking-[0.4em] hover:text-gold transition-colors"
+                href="#curation">Diferenciais</a>
+            <button
+                class="border border-pearl/30 hover:border-gold hover:text-gold px-8 py-3 text-[10px] uppercase tracking-[0.4em] transition-all">
+                Reserva Privada
+            </button>
+        </nav>
+        <button class="lg:hidden text-pearl">
+            <span class="material-symbols-outlined text-4xl">menu</span>
+        </button>
+    </header>
+
+    <main>
+        <section class="relative min-h-screen flex flex-col md:flex-row items-stretch bg-emerald">
+            <div class="w-full md:w-7/12 relative h-[70vh] md:h-screen overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center grayscale-image animate-slow-pan"
+                    data-alt="Avant-garde aesthetic space"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRUlKVb3ojNyz5yvGxuzwDZoApQ1hf0iUadOM4djQu6KXEIzZKGFvVOoWXXAvwvujqQC6KfvBSGfGpIrgqYI4UaMioJicCUEjiGTq2GlSMJ-I9wxVL6sbzQCaPYrUwibSJo7PnTE3rVAC67GuOpicFLXQWgCbhRTt2Z5pDRzEWFY_IrJy6pNpD9Fd4V7ykYRc7lGAFAgB18zqcDD7uQC4kjq6nZtC6KoAT8dU7zkkTqP5u6Z4mXiiZCEXxiU7sh337g2EDh0cv0NU");'>
+                </div>
+                <div class="absolute inset-0 bg-emerald/30 mix-blend-multiply"></div>
+                <div class="absolute bottom-12 left-12 max-w-xl z-10">
+                    <span class="text-gold text-xs uppercase tracking-[0.5em] mb-4 block reveal delay-100">Volume I — A
+                        Poética da Face</span>
+                    <h1 class="text-5xl md:text-8xl text-pearl leading-none mb-8 reveal delay-300">
+                        A Arte do <br /><span class="pl-20">Invisível.</span>
+                    </h1>
+                </div>
+            </div>
+            <div
+                class="w-full md:w-5/12 bg-onyx p-12 md:p-24 flex flex-col justify-center border-l border-white/5 overflow-hidden">
+                <p
+                    class="text-xl md:text-2xl font-serif italic text-gold-light leading-relaxed mb-12 reveal-left delay-200">
+                    "A beleza não é uma construção, mas uma revelação. Na Essence, curamos a estética através do prisma
+                    da alta ciência e do olhar artístico."
+                </p>
+                <div class="flex flex-col gap-8 reveal-left delay-400">
+                    <button
+                        class="bg-pearl text-onyx px-12 py-6 text-xs uppercase tracking-[0.4em] font-medium hover:bg-gold hover:text-onyx transition-all self-start">
+                        Agendar Consultoria
+                    </button>
+                    <div class="flex items-center gap-4 text-[10px] tracking-widest text-pearl/40 uppercase">
+                        <span>Largo da Barra</span>
+                        <div class="w-12 h-px bg-white/20"></div>
+                        <span>Exclusividade Médica</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-8 md:px-24 bg-pearl text-onyx relative overflow-hidden" id="artistry">
+            <div id="parallax-text-1"
+                class="absolute right-0 top-[10%] opacity-[0.03] text-[20vw] font-serif italic pointer-events-none select-none vertical-text transition-transform duration-100 ease-out">
+                Essence
+            </div>
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-20 items-center">
+                <div class="w-full md:w-1/2 relative reveal-scale delay-100">
+                    <div class="aspect-[4/5] bg-onyx overflow-hidden grayscale-image shadow-2xl">
+                        <img alt="Elite Medical Expertise"
+                            class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]"
+                            src="../Imagem/profissional_estetica_1.png" />
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -right-10 w-64 aspect-square bg-emerald p-1 grayscale-image reveal-left delay-400 animate-float z-10">
+                        <div class="w-full h-full border border-gold/30 flex items-center justify-center p-8 bg-onyx">
+                            <p class="text-gold text-[10px] tracking-[0.3em] uppercase text-center leading-loose">
+                                Protocolos sob medida para a elite contemporânea</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 pl-0 md:pl-12">
+                    <h2 class="text-4xl md:text-6xl mb-12 leading-tight reveal delay-100">Um pouco sobre <br /><span
+                            class="text-gold italic">minha trajetória.</span></h2>
+                    <p class="text-onyx/70 text-lg leading-relaxed mb-8 reveal delay-200">
+                        A jornada de uma médica que se tornou artista plástica e encontrou na estética médica a
+                        perfeita união entre ciência e arte, onde cada procedimento é uma obra de arte. Eu amo o que
+                        faço e minhas pacientes são minha inspiração.
+                    </p>
+                    <div class="h-px w-32 bg-gold/50 mb-8 reveal delay-300"></div>
+                    <button
+                        class="text-onyx text-xs uppercase tracking-[0.4em] flex items-center gap-4 group reveal delay-400">
+                        Ver o filme da marca <span
+                            class="material-symbols-outlined group-hover:translate-x-2 transition-transform text-gold animate-subtle-pulse">play_circle</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-onyx py-32 px-8 md:px-24" id="collection">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-white/10 pb-12">
+                <div class="reveal-right delay-100">
+                    <span class="text-gold text-xs uppercase tracking-[0.5em] mb-4 block">Curation</span>
+                    <h2 class="text-5xl md:text-7xl">Nossa Coleção</h2>
+                </div>
+                <p
+                    class="max-w-xs text-pearl/40 text-[10px] uppercase tracking-widest leading-loose text-right reveal-left delay-300">
+                    Tratamentos desenhados para mulheres que apreciam o luxo do detalhe e a sofisticação da
+                    naturalidade.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="group cursor-pointer reveal-scale delay-100">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-8">
+                        <div class="absolute inset-0 bg-cover bg-center grayscale-image group-hover:scale-110 transition-transform duration-[1.5s]"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBOtErFavZe_H1GJaDhmuLZ4vtNPJgPu3TMCm500XQWAScSOeGAaQSk7saa4SHHaq4CzbqGIeFx-GVY-5g4StOYGk1iiKYNPOJaFQQw3pxVhHlOofexETNJSw_BK0o98avnXefXDkfcnnSISY9AzJTv7CYZts1RVK9RPzP4lb_UZTEFNJUKK_Sf1hiTZlTeCXn-22F27gWTfz7m8g7qeCdOCwaMyPmJSPgnXMPXe5w8VbIJNSs5L2jn5bqs70p1uINK22cvrCVCwLE");'>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-emerald/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span
+                                class="text-gold text-[10px] tracking-widest uppercase mb-2 block transition-transform group-hover:translate-x-2 duration-300">01
+                                / Harmonização</span>
+                            <h3 class="text-2xl text-pearl group-hover:text-gold transition-colors">A Escultura Facial
+                            </h3>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-gold-light opacity-50 group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+                    </div>
+                </div>
+                <div class="group cursor-pointer mt-12 md:mt-24 reveal-scale delay-300">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-8">
+                        <div class="absolute inset-0 bg-cover bg-center grayscale-image group-hover:scale-110 transition-transform duration-[1.5s]"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLLg9zCdbnHXS0wvxfPZKKCM_vukpFnWDhrolw2wiMhL2AI4wy_wGGfYx7OJr0uGkn9A2Ig1eso9mMA1x0RJhLrMCt1n9V6ZLujFnz0ywJV-FzIjgpaqLXmtiDolfTf3oHqUMdQ9m4KegXhYh8aZ2FtpmW5GUfrRGN7dE8JvihRuArj2-mSGexh6QGOGTFpO-glhloIM3CQNVML2QrTR81IwZ5hm7-JRCqda9YfntxW2aCgqF3K57_FGta-J3GUMwTkyfYvpb4i-k");'>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-emerald/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span
+                                class="text-gold text-[10px] tracking-widest uppercase mb-2 block transition-transform group-hover:translate-x-2 duration-300">02
+                                / Contorno</span>
+                            <h3 class="text-2xl text-pearl group-hover:text-gold transition-colors">Arquitetura Corporal
+                            </h3>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-gold-light opacity-50 group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+                    </div>
+                </div>
+                <div class="group cursor-pointer reveal-scale delay-500">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-8">
+                        <div class="absolute inset-0 bg-cover bg-center grayscale-image group-hover:scale-110 transition-transform duration-[1.5s]"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDk1DWIu0OlYEi8slWU2CvTbjJzFDRhsKI-U0paUS_qiZWTEsxHVmUiDnKfCAx5sS0ssccNtj_PH7XRh5zwm3QKwIeJR2MlBuGYm5xJK5UbuPi7-XAZcnoSnqBq_0-ACrqWWliAaq7n5hopIwFHhtaQufxDPtGCVx_eqNJstENv117giGaaGtdQmf0W5XFaKlU7I3Jh8ra42pkGJrFzVu7AVMZumIZwZDRiSqYqqhcpeIQNU0ERdJ2otom_xFtuwjBFJvkYxSaXjrw");'>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-emerald/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span
+                                class="text-gold text-[10px] tracking-widest uppercase mb-2 block transition-transform group-hover:translate-x-2 duration-300">03
+                                / Regeneração</span>
+                            <h3 class="text-2xl text-pearl group-hover:text-gold transition-colors">Dermatologia Laser
+                            </h3>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-gold-light opacity-50 group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 bg-emerald">
+            <div class="max-w-6xl mx-auto px-8 flex flex-col items-center">
+                <span class="text-gold-light text-xs uppercase tracking-[0.5em] mb-12 reveal delay-100">Le
+                    Témoignage</span>
+                <div class="w-full relative overflow-hidden">
+                    <div class="flex flex-col items-center text-center">
+                        <span
+                            class="material-symbols-outlined text-6xl text-gold/20 mb-8 reveal-scale delay-200 animate-subtle-pulse">format_quote</span>
+                        <p
+                            class="text-3xl md:text-5xl font-serif italic text-pearl leading-snug max-w-4xl mb-12 reveal delay-300">
+                            "Na Essence, não encontrei apenas procedimentos, mas uma nova forma de me enxergar. O luxo
+                            está na sutileza dos resultados."
+                        </p>
+                        <div class="flex items-center gap-6 reveal delay-400">
+                            <div
+                                class="w-16 h-16 rounded-full overflow-hidden grayscale-image border border-gold/30 shadow-lg group">
+                                <img alt="Patient"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5BkDG_H9q2RS90bmPTnOQWkoQdjDX88vaKS16Dp60_ACotK6Jy3YOk2Wiu_gGQwLETqkBsuqCMk6au09zLtvZq9WpRNhRlZJwwh_kaY5PHOecQ9uOsKWFTsM0trEyy0Kna47NvCUb-_BcAbhGq9WuFKemhirH-jZOxnEqIA34uykJWfjHhTa0yrUvh5rzympzKbpCDowynsvQXuxTJQmyzCDERdVsVsEehSxV7pPTCOMflo3dUqIeKiS0WOEl2tnU-OV8F5Y3cM" />
+                            </div>
+                            <div class="text-left">
+                                <p class="text-gold font-display uppercase tracking-widest">Juliana Moraes</p>
+                                <p class="text-[10px] text-pearl/40 uppercase tracking-widest">Colecionadora de Arte</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-8 md:px-24 bg-onyx" id="curation">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10">
+                <div
+                    class="p-12 border-b md:border-b-0 md:border-r border-white/10 hover:bg-emerald/20 transition-all reveal-left delay-100">
+                    <h4 class="text-gold text-[10px] tracking-[0.4em] uppercase mb-12">L'Essentiel</h4>
+                    <div class="mb-12">
+                        <p class="text-4xl font-serif mb-2">R$ 490</p>
+                        <p class="text-[10px] uppercase tracking-widest text-pearl/30">Assinatura Mensal</p>
+                    </div>
+                    <ul class="space-y-6 text-xs tracking-widest text-pearl/60 uppercase mb-16">
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Ritual Mensal de Pele</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Curadoria Dermatológica</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Acesso Prioritário</li>
+                    </ul>
+                    <button
+                        class="w-full border border-pearl/20 py-4 text-[10px] uppercase tracking-[0.4em] hover:bg-pearl hover:text-onyx transition-all">Select</button>
+                </div>
+                <div
+                    class="p-12 border-b md:border-b-0 md:border-r border-white/10 bg-emerald/40 relative overflow-hidden group reveal-scale delay-300">
+                    <div
+                        class="absolute top-0 right-0 bg-gold px-4 py-1 text-onyx text-[8px] font-black uppercase tracking-[0.3em]">
+                        Signature</div>
+                    <h4 class="text-gold text-[10px] tracking-[0.4em] uppercase mb-12">Exclusive</h4>
+                    <div class="mb-12">
+                        <p class="text-4xl font-serif mb-2">R$ 980</p>
+                        <p class="text-[10px] uppercase tracking-widest text-pearl/30">Assinatura Mensal</p>
+                    </div>
+                    <ul class="space-y-6 text-xs tracking-widest text-pearl/80 uppercase mb-16">
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Protocolo Laser Gold</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Skincare Bio-Ativo</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Concierge 24/7</li>
+                    </ul>
+                    <button
+                        class="w-full bg-gold text-onyx py-4 text-[10px] uppercase tracking-[0.4em] hover:bg-gold-light transition-all font-bold">Inquire</button>
+                </div>
+                <div class="p-12 hover:bg-emerald/20 transition-all reveal-right delay-100">
+                    <h4 class="text-gold text-[10px] tracking-[0.4em] uppercase mb-12">L'Opulence</h4>
+                    <div class="mb-12">
+                        <p class="text-4xl font-serif mb-2">R$ 1.850</p>
+                        <p class="text-[10px] uppercase tracking-widest text-pearl/30">Assinatura Mensal</p>
+                    </div>
+                    <ul class="space-y-6 text-xs tracking-widest text-pearl/60 uppercase mb-16">
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Escultura Corporal VIP</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Medicina Regenerativa</li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
+                            Eventos Exclusivos</li>
+                    </ul>
+                    <button
+                        class="w-full border border-pearl/20 py-4 text-[10px] uppercase tracking-[0.4em] hover:bg-pearl hover:text-onyx transition-all">Select</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 bg-pearl text-onyx overflow-hidden relative">
+            <div class="container mx-auto px-8 relative z-10 text-center">
+                <h2 class="text-6xl md:text-9xl mb-12 italic reveal-scale delay-100">Defina sua Essence.</h2>
+                <p
+                    class="text-sm uppercase tracking-[0.5em] mb-16 max-w-lg mx-auto leading-loose opacity-60 reveal delay-200">
+                    O início de sua jornada estética começa com uma conversa privada. Permita-nos elevar sua beleza à
+                    categoria de obra de arte.
+                </p>
+                <div class="reveal delay-400">
+                    <button
+                        class="px-20 py-8 bg-onyx text-pearl text-xs uppercase tracking-[0.5em] hover:bg-emerald transition-all shadow-2xl hover:-translate-y-2">
+                        Solicitar Agendamento
+                    </button>
+                </div>
+            </div>
+            <div
+                class="absolute bottom-0 right-0 w-1/3 opacity-20 pointer-events-none grayscale-image animate-float z-0">
+                <img alt="Abstract Elegance"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1jUpu8IWT4WeIihz1b8SPTCv_LQjKFgi82blatyFMJTEBIueKazHHOmapr_sSU0TcdEnXiXjZ8Jpe92tNBcgXQMmT-Bb9zzesFyQJWaKPdmSuqbNHz5xouSuNn24s-q412T1MyLqIxFYeEUhG7GMiUflh2elihx8Zk_99ISY7xPE3Zxql8-2UelFOF37k4eJDP65SR6rEB597rEhQvbmCjRUquZ08kxVAfmu4Mn9O6txUvhcrTdSQw2u4OZ1sg_4fEU4tBIqh-RE" />
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-onyx text-pearl/40 py-24 px-8 md:px-24 border-t border-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+            <div class="col-span-1 md:col-span-1 reveal delay-100">
+                <span class="text-3xl font-display uppercase tracking-[0.3em] text-pearl block mb-8">Essence</span>
+                <p class="text-[10px] uppercase tracking-[0.3em] leading-relaxed">
+                    A convergência entre medicina estética, luxo e arte. <br />Barra da Tijuca, RJ.
+                </p>
+            </div>
+            <div class="reveal delay-200">
+                <h5 class="text-gold text-[10px] uppercase tracking-[0.4em] mb-8">Navegação</h5>
+                <ul class="space-y-4 text-[10px] uppercase tracking-[0.3em]">
+                    <li><a class="hover:text-pearl transition-colors" href="#">Manifesto</a></li>
+                    <li><a class="hover:text-pearl transition-colors" href="#">Coleções</a></li>
+                    <li><a class="hover:text-pearl transition-colors" href="#">A Clínica</a></li>
+                    <li><a class="hover:text-pearl transition-colors" href="#">Journal</a></li>
+                </ul>
+            </div>
+            <div class="reveal delay-300">
+                <h5 class="text-gold text-[10px] uppercase tracking-[0.4em] mb-8">Contato</h5>
+                <ul class="space-y-4 text-[10px] uppercase tracking-[0.3em]">
+                    <li class="flex items-center gap-2">WhatsApp: +55 (21) 99888.7766</li>
+                    <li>Email: privé@essenceclinic.com</li>
+                    <li>Instagram: @essence.artistry</li>
+                </ul>
+            </div>
+            <div class="reveal delay-400">
+                <h5 class="text-gold text-[10px] uppercase tracking-[0.4em] mb-8">Newsletter</h5>
+                <div class="relative group">
+                    <input
+                        class="bg-transparent border-0 border-b border-white/20 w-full py-2 text-[10px] uppercase tracking-[0.3em] focus:border-gold focus:ring-0 placeholder:text-pearl/20 transition-colors"
+                        placeholder="ENDEREÇO DE E-MAIL" type="email" />
+                    <button
+                        class="absolute right-0 bottom-2 text-gold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+                        <span class="material-symbols-outlined">north_east</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="flex flex-col md:flex-row justify-between items-center gap-8 pt-8 border-t border-white/5 text-[9px] uppercase tracking-[0.4em] reveal delay-500">
+            <p>© 2026 Essence Estética Médica. Direitos Reservados. Desenvolvido por <a
+                    href="https://reis-automacao-screens.vercel.app">Reis Automação</a></p>
+            <div class="flex gap-12">
+                <a class="hover:text-pearl transition-colors" href="#">Termos Privados</a>
+                <a class="hover:text-pearl transition-colors" href="#">Ética Médica</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.querySelector('header button.lg\\:hidden');
+            const nav = document.querySelector('header nav');
+
+            if (menuBtn && nav) {
+                menuBtn.addEventListener('click', () => {
+                    nav.classList.toggle('hidden');
+                    nav.classList.toggle('flex');
+                    nav.classList.toggle('flex-col');
+                    nav.classList.toggle('absolute');
+                    nav.classList.toggle('top-full');
+                    nav.classList.toggle('left-0');
+                    nav.classList.toggle('w-full');
+                    nav.classList.toggle('bg-onyx');
+                    nav.classList.toggle('p-8');
+                    nav.classList.toggle('border-b');
+                    nav.classList.toggle('border-white/10');
+                });
+            }
+
+            // Animação Ativa Pelo Scroll (Intersection Observer)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        // Para criar o efeito de "saída" removendo a classe ao sair da tela (repetição de animação)
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-down').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Efeito Parallax Direto no Scroll para elementos específicos
+            window.addEventListener('scroll', () => {
+                const parallaxText = document.getElementById('parallax-text-1');
+                if (parallaxText) {
+                    let scrollPosition = window.pageYOffset;
+                    parallaxText.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

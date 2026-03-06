@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500&family=Pinyon+Script&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rose-gold': '#b76e79',
+                        'lavender-mist': '#e6e6fa',
+                        'champagne': '#f7e7ce',
+                        'deep-aura': '#2d1b2d',
+                    },
+                    fontFamily: {
+                        'script': ['Pinyon Script', 'cursive'],
+                        'serif': ['Playfair Display', 'serif'],
+                        'display': ['Cinzel', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --gradient-aura: linear-gradient(135deg, #f7e7ce 0%, #f3d1d1 35%, #e6e6fa 100%);
+        }
+        .full-screen-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .aura-bg {
+            background: var(--gradient-aura);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .script-title {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+        }
+        .parallax-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        /* Animações de Entrada e Saída */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.9); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        .reveal-down { opacity: 0; transform: translateY(-40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-down.active { opacity: 1; transform: translateY(0); }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        @keyframes slowPan { 0% { transform: scale(1) translate(0,0); } 50% { transform: scale(1.05) translate(-1%, -1%); } 100% { transform: scale(1) translate(0,0); } }
+        .animate-slow-pan { animation: slowPan 25s ease-in-out infinite; }
+        @keyframes floatImage { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        .animate-float { animation: floatImage 8s ease-in-out infinite; }
+        @keyframes subtlePulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .animate-subtle-pulse { animation: subtlePulse 4s ease-in-out infinite; }
+    </style>
+</head>
+
+<body class="bg-champagne font-sans text-slate-800 antialiased selection:bg-rose-gold/30">
+    <header
+        class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-white/5 backdrop-blur-sm border-b border-white/10 reveal-down active">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <span
+                class="material-symbols-outlined text-rose-gold text-3xl transition-transform group-hover:rotate-180 duration-1000 animate-subtle-pulse">auto_awesome</span>
+            <h1 class="font-display font-bold text-xl tracking-[0.2em] uppercase text-deep-aura">Essence</h1>
+        </div>
+        <nav class="hidden lg:flex items-center gap-10">
+            <a class="text-xs uppercase tracking-[0.3em] font-medium hover:text-rose-gold transition-colors"
+                href="#quem-somos">A Jornada</a>
+            <a class="text-xs uppercase tracking-[0.3em] font-medium hover:text-rose-gold transition-colors"
+                href="#essencia">Essência</a>
+            <a class="text-xs uppercase tracking-[0.3em] font-medium hover:text-rose-gold transition-colors"
+                href="#rituais">Rituais</a>
+            <a class="text-xs uppercase tracking-[0.3em] font-medium hover:text-rose-gold transition-colors border border-deep-aura/20 px-6 py-2 rounded-full hover:bg-deep-aura hover:text-white transition-all transform hover:-translate-y-1"
+                href="#contato">Agendar</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="full-screen-section aura-bg px-6 md:px-20 relative" id="aura">
+            <div class="parallax-blob bg-rose-gold w-[500px] h-[500px] -top-20 -left-20 animate-float"></div>
+            <div class="parallax-blob bg-lavender-mist w-[600px] h-[600px] -bottom-40 -right-20 animate-float"
+                style="animation-delay: -2s;"></div>
+            <div class="relative z-10 max-w-5xl mx-auto text-center md:text-left">
+                <span
+                    class="inline-block text-rose-gold font-display tracking-[0.4em] uppercase text-sm mb-6 reveal delay-100">O
+                    Despertar da Aura</span>
+                <h2 class="script-title text-deep-aura mb-2 reveal delay-200">Aura of Essence</h2>
+                <h3 class="font-serif italic text-3xl md:text-5xl text-slate-700 leading-tight mb-8 reveal delay-300">
+                    Sinta a luz que emana da sua <span class="text-rose-gold">transformação interior</span>.
+                </h3>
+                <p
+                    class="font-sans text-lg md:text-xl text-slate-600 max-w-xl mb-12 font-light leading-relaxed reveal delay-400">
+                    Não é apenas estética, é uma conexão espiritual com sua própria beleza. Um santuário onde a ciência
+                    encontra o etéreo.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start reveal delay-500">
+                    <button
+                        class="bg-deep-aura text-white px-10 py-5 rounded-full font-display text-xs tracking-[0.2em] uppercase hover:bg-rose-gold transition-all shadow-xl shadow-deep-aura/20 hover:-translate-y-1">
+                        Iniciar Jornada
+                    </button>
+                    <button
+                        class="border border-deep-aura/20 text-deep-aura px-10 py-5 rounded-full font-display text-xs tracking-[0.2em] uppercase hover:bg-white/50 transition-all hover:-translate-y-1">
+                        O Manifesto
+                    </button>
+                </div>
+            </div>
+            <div
+                class="absolute right-0 bottom-0 w-full lg:w-1/2 h-[60vh] lg:h-full overflow-hidden opacity-40 lg:opacity-100 pointer-events-none">
+                <img alt="Sublime space"
+                    class="w-full h-full object-cover grayscale brightness-110 sepia-[0.2] animate-slow-pan"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRUlKVb3ojNyz5yvGxuzwDZoApQ1hf0iUadOM4djQu6KXEIzZKGFvVOoWXXAvwvujqQC6KfvBSGfGpIrgqYI4UaMioJicCUEjiGTq2GlSMJ-I9wxVL6sbzQCaPYrUwibSJo7PnTE3rVAC67GuOpicFLXQWgCbhRTt2Z5pDRzEWFY_IrJy6pNpD9Fd4V7ykYRc7lGAFAgB18zqcDD7uQC4kjq6nZtC6KoAT8dU7zkkTqP5u6Z4mXiiZCEXxiU7sh337g2EDh0cv0NU" />
+                <div class="absolute inset-0 bg-gradient-to-r from-champagne via-transparent to-transparent"></div>
+            </div>
+        </section>
+
+        <section class="full-screen-section bg-deep-aura text-white px-6 md:px-20 py-24 overflow-hidden">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative reveal-scale delay-100">
+                    <div class="aspect-[4/5] rounded-[100px] overflow-hidden border border-white/10 p-4">
+                        <img alt="Essential Connection"
+                            class="w-full h-full object-cover rounded-[80px] opacity-80 hover:scale-110 transition-transform duration-[2s]"
+                            src="../Imagem/profissional_estetica_1.png" />
+                        <div
+                            class="absolute -bottom-10 -right-10 bg-rose-gold p-12 rounded-full border border-white/20 blur-[2px] animate-float">
+                            <span class="material-symbols-outlined text-white text-5xl">auto_fix_high</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 space-y-8" id="quem-somos">
+                    <span
+                        class="text-rose-gold font-display tracking-[0.3em] uppercase text-xs reveal-right delay-100">A
+                        Conexão</span>
+                    <h2 class="font-serif text-5xl md:text-6xl leading-tight italic reveal-right delay-200">Sua
+                        autoestima é uma prece visual! <span class="text-rose-gold"> Quem somos nós?</span></h2>
+                    <p class="font-sans font-light text-white/70 text-lg leading-relaxed reveal-right delay-300"> Somos
+                        uma clinica atuante desde 2005, com foco em tratamentos estéticos e terapêuticos.
+                        Entendemos que a verdadeira beleza floresce de dentro para fora. Nossos protocolos são rituais
+                        de cuidado que restauram não apenas a pele, mas o espírito.
+                    </p>
+                    <div class="pt-8 border-t border-white/10 reveal-right delay-400">
+                        <div class="flex items-center gap-6">
+                            <button
+                                class="size-16 rounded-full border border-rose-gold flex items-center justify-center group hover:bg-rose-gold transition-all animate-subtle-pulse">
+                                <span
+                                    class="material-symbols-outlined text-rose-gold group-hover:text-white transition-colors">play_arrow</span>
+                            </button>
+                            <span class="text-xs tracking-widest uppercase opacity-60">Assista ao despertar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-screen-section bg-white px-6 md:px-20 py-24 relative" id="essencia">
+            <div
+                class="parallax-blob bg-lavender-mist/40 w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-[120px] animate-float">
+            </div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-center mb-20 reveal delay-100">
+                    <h2 class="script-title text-rose-gold mb-4">Pilares da Essência</h2>
+                    <p class="font-display tracking-[0.2em] text-deep-aura uppercase text-sm">Onde a alta tecnologia
+                        abraça o sagrado</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div
+                        class="text-center space-y-6 group p-10 hover:bg-champagne/30 rounded-[40px] transition-all duration-700 reveal-scale delay-100 cursor-pointer">
+                        <div
+                            class="mx-auto size-20 rounded-full bg-champagne flex items-center justify-center mb-8 relative group-hover:-translate-y-2 transition-transform">
+                            <div
+                                class="absolute inset-0 rounded-full border border-rose-gold scale-125 opacity-20 group-hover:scale-150 group-hover:opacity-0 transition-all duration-1000">
+                            </div>
+                            <span class="material-symbols-outlined text-rose-gold text-4xl">verified_user</span>
+                        </div>
+                        <h3
+                            class="font-serif text-2xl italic text-deep-aura group-hover:text-rose-gold transition-colors">
+                            Saber Ancestral & Moderno</h3>
+                        <p class="text-slate-500 font-light leading-relaxed">Mestres em estética unindo técnicas
+                            milenares de relaxamento com laser de última geração.</p>
+                    </div>
+                    <div
+                        class="text-center space-y-6 group p-10 hover:bg-champagne/30 rounded-[40px] transition-all duration-700 reveal-scale delay-300 cursor-pointer">
+                        <div
+                            class="mx-auto size-20 rounded-full bg-lavender-mist flex items-center justify-center mb-8 relative group-hover:-translate-y-2 transition-transform">
+                            <div
+                                class="absolute inset-0 rounded-full border border-rose-gold scale-125 opacity-20 group-hover:scale-150 group-hover:opacity-0 transition-all duration-1000">
+                            </div>
+                            <span class="material-symbols-outlined text-rose-gold text-4xl">flare</span>
+                        </div>
+                        <h3
+                            class="font-serif text-2xl italic text-deep-aura group-hover:text-rose-gold transition-colors">
+                            Alquimia Tecnológica</h3>
+                        <p class="text-slate-500 font-light leading-relaxed">Equipamentos que dialogam com a biologia
+                            celular para resultados que parecem mágica.</p>
+                    </div>
+                    <div
+                        class="text-center space-y-6 group p-10 hover:bg-champagne/30 rounded-[40px] transition-all duration-700 reveal-scale delay-500 cursor-pointer">
+                        <div
+                            class="mx-auto size-20 rounded-full bg-rose-gold/10 flex items-center justify-center mb-8 relative group-hover:-translate-y-2 transition-transform">
+                            <div
+                                class="absolute inset-0 rounded-full border border-rose-gold scale-125 opacity-20 group-hover:scale-150 group-hover:opacity-0 transition-all duration-1000">
+                            </div>
+                            <span class="material-symbols-outlined text-rose-gold text-4xl">self_improvement</span>
+                        </div>
+                        <h3
+                            class="font-serif text-2xl italic text-deep-aura group-hover:text-rose-gold transition-colors">
+                            Presença Consciente</h3>
+                        <p class="text-slate-500 font-light leading-relaxed">Um atendimento que honra seu tempo e sua
+                            individualidade, criando um casulo de paz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen bg-deep-aura py-32 px-6 md:px-20 overflow-hidden" id="rituais">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                    <div class="max-w-2xl reveal-right delay-100">
+                        <span class="text-rose-gold font-display tracking-[0.4em] uppercase text-xs block mb-4">Nossos
+                            Rituais</span>
+                        <h2 class="font-serif text-5xl md:text-7xl text-white italic">Alquimias de <span
+                                class="text-rose-gold">Luz</span></h2>
+                    </div>
+                    <p class="text-white/50 max-w-sm font-light text-right italic reveal-left delay-300">
+                        Explore caminhos de cura estética desenhados para elevar sua presença no mundo.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="relative group h-[700px] rounded-[60px] overflow-hidden reveal-scale delay-100 cursor-pointer">
+                        <img alt="Ritual Facial"
+                            class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOtErFavZe_H1GJaDhmuLZ4vtNPJgPu3TMCm500XQWAScSOeGAaQSk7saa4SHHaq4CzbqGIeFx-GVY-5g4StOYGk1iiKYNPOJaFQQw3pxVhHlOofexETNJSw_BK0o98avnXefXDkfcnnSISY9AzJTv7CYZts1RVK9RPzP4lb_UZTEFNJUKK_Sf1hiTZlTeCXn-22F27gWTfz7m8g7qeCdOCwaMyPmJSPgnXMPXe5w8VbIJNSs5L2jn5bqs70p1uINK22cvrCVCwLE" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep-aura via-transparent to-transparent opacity-90 transition-opacity group-hover:opacity-70">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 p-12 w-full translate-y-8 group-hover:translate-y-0 transition-transform duration-700">
+                            <h3
+                                class="script-title text-champagne text-4xl mb-2 group-hover:text-white transition-colors">
+                                Pele de Estrela</h3>
+                            <p
+                                class="text-white/60 mb-6 font-light opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                Harmonização que flutua entre a arte e a precisão médica.</p>
+                            <span
+                                class="inline-block border-b border-rose-gold text-rose-gold pb-2 text-xs uppercase tracking-[0.3em] transition-transform group-hover:translate-x-2">Conhecer
+                                Ritual</span>
+                        </div>
+                    </div>
+                    <div
+                        class="relative group h-[700px] rounded-[60px] overflow-hidden mt-12 md:mt-24 reveal-scale delay-300 cursor-pointer">
+                        <img alt="Ritual Corporal"
+                            class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLLg9zCdbnHXS0wvxfPZKKCM_vukpFnWDhrolw2wiMhL2AI4wy_wGGfYx7OJr0uGkn9A2Ig1eso9mMA1x0RJhLrMCt1n9V6ZLujFnz0ywJV-FzIjgpaqLXmtiDolfTf3oHqUMdQ9m4KegXhYh8aZ2FtpmW5GUfrRGN7dE8JvihRuArj2-mSGexh6QGOGTFpO-glhloIM3CQNVML2QrTR81IwZ5hm7-JRCqda9YfntxW2aCgqF3K57_FGta-J3GUMwTkyfYvpb4i-k" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep-aura via-transparent to-transparent opacity-90 transition-opacity group-hover:opacity-70">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 p-12 w-full translate-y-8 group-hover:translate-y-0 transition-transform duration-700">
+                            <h3
+                                class="script-title text-champagne text-4xl mb-2 group-hover:text-white transition-colors">
+                                Escultura de Seda</h3>
+                            <p
+                                class="text-white/60 mb-6 font-light opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                O corpo como templo. Tecnologias que definem sua essência física.</p>
+                            <span
+                                class="inline-block border-b border-rose-gold text-rose-gold pb-2 text-xs uppercase tracking-[0.3em] transition-transform group-hover:translate-x-2">Conhecer
+                                Ritual</span>
+                        </div>
+                    </div>
+                    <div
+                        class="relative group h-[700px] rounded-[60px] overflow-hidden reveal-scale delay-500 cursor-pointer">
+                        <img alt="Ritual Dermato"
+                            class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk1DWIu0OlYEi8slWU2CvTbjJzFDRhsKI-U0paUS_qiZWTEsxHVmUiDnKfCAx5sS0ssccNtj_PH7XRh5zwm3QKwIeJR2MlBuGYm5xJK5UbuPi7-XAZcnoSnqBq_0-ACrqWWliAaq7n5hopIwFHhtaQufxDPtGCVx_eqNJstENv117giGaaGtdQmf0W5XFaKlU7I3Jh8ra42pkGJrFzVu7AVMZumIZwZDRiSqYqqhcpeIQNU0ERdJ2otom_xFtuwjBFJvkYxSaXjrw" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep-aura via-transparent to-transparent opacity-90 transition-opacity group-hover:opacity-70">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 p-12 w-full translate-y-8 group-hover:translate-y-0 transition-transform duration-700">
+                            <h3
+                                class="script-title text-champagne text-4xl mb-2 group-hover:text-white transition-colors">
+                                Toque de Cetim</h3>
+                            <p
+                                class="text-white/60 mb-6 font-light opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                Dermatologia avançada para um brilho que vem de dentro.</p>
+                            <span
+                                class="inline-block border-b border-rose-gold text-rose-gold pb-2 text-xs uppercase tracking-[0.3em] transition-transform group-hover:translate-x-2">Conhecer
+                                Ritual</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-screen-section aura-bg px-6 py-24">
+            <div class="max-w-5xl mx-auto">
+                <div
+                    class="glass-panel p-16 md:p-24 rounded-[80px] text-center shadow-2xl relative reveal-down delay-100">
+                    <span
+                        class="material-symbols-outlined text-rose-gold/20 text-[10rem] absolute -top-10 -left-10 select-none animate-subtle-pulse">format_quote</span>
+                    <div class="relative z-10">
+                        <p
+                            class="font-serif italic text-3xl md:text-5xl text-deep-aura leading-snug mb-12 reveal delay-200">
+                            "Na Essence, eu não encontrei apenas um tratamento, eu encontrei <span
+                                class="text-rose-gold underline decoration-rose-gold/30">minha melhor versão</span>. O
+                            cuidado é tão profundo que a gente sai se sentindo iluminada."
+                        </p>
+                        <div class="flex flex-col items-center gap-4 reveal delay-300">
+                            <div
+                                class="size-24 rounded-full p-1 border-2 border-rose-gold hover:scale-110 transition-transform">
+                                <img alt="Juliana" class="w-full h-full object-cover rounded-full"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5BkDG_H9q2RS90bmPTnOQWkoQdjDX88vaKS16Dp60_ACotK6Jy3YOk2Wiu_gGQwLETqkBsuqCMk6au09zLtvZq9WpRNhRlZJwwh_kaY5PHOecQ9uOsKWFTsM0trEyy0Kna47NvCUb-_BcAbhGq9WuFKemhirH-jZOxnEqIA34uykJWfjHhTa0yrUvh5rzympzKbpCDowynsvQXuxTJQmyzCDERdVsVsEehSxV7pPTCOMflo3dUqIeKiS0WOEl2tnU-OV8F5Y3cM" />
+                            </div>
+                            <div>
+                                <h4 class="font-display tracking-[0.2em] text-deep-aura uppercase font-bold">Juliana
+                                    Moraes</h4>
+                                <p class="text-xs italic text-slate-500 mt-1">Empresária & Paciente Essence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen bg-white px-6 md:px-20 py-32">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-24 reveal delay-100">
+                    <h2 class="script-title text-rose-gold">Ciclos de Constância</h2>
+                    <p class="font-display tracking-[0.3em] text-deep-aura uppercase text-sm mt-4">A beleza é um ritual
+                        contínuo</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div
+                        class="glass-panel p-12 rounded-[50px] flex flex-col items-center text-center hover:-translate-y-4 hover:shadow-2xl transition-all duration-500 reveal-left delay-100">
+                        <span class="text-xs tracking-widest uppercase text-slate-400 mb-2">Ciclo I</span>
+                        <h3 class="font-serif text-3xl mb-6">Aurora</h3>
+                        <div class="mb-10">
+                            <span class="text-5xl font-light text-deep-aura">R$ 490</span>
+                            <span class="text-xs uppercase tracking-widest text-slate-400 block mt-2">mensais</span>
+                        </div>
+                        <ul class="space-y-4 text-sm font-light text-slate-600 mb-12 flex-1">
+                            <li>Limpeza de Pele Profunda</li>
+                            <li>Drenagem Facial Revigorante</li>
+                            <li>Aconselhamento Cosmético</li>
+                            <li class="opacity-30 line-through">Protocolo Laser Prime</li>
+                        </ul>
+                        <button
+                            class="w-full py-4 border border-rose-gold text-rose-gold rounded-full font-display text-[10px] tracking-[0.3em] uppercase hover:bg-rose-gold hover:text-white transition-all">Selecionar</button>
+                    </div>
+                    <div
+                        class="bg-deep-aura p-14 rounded-[60px] flex flex-col items-center text-center shadow-2xl shadow-deep-aura/30 scale-110 relative z-10 hover:-translate-y-2 hover:shadow-deep-aura/50 transition-all reveal-scale delay-300">
+                        <div
+                            class="absolute -top-6 bg-rose-gold text-white px-8 py-2 rounded-full text-[10px] tracking-[0.3em] uppercase font-bold animate-subtle-pulse">
+                            Mais Escolhido</div>
+                        <span class="text-xs tracking-widest uppercase text-white/30 mb-2">Ciclo II</span>
+                        <h3 class="font-serif text-3xl mb-6 text-white italic">Radiance</h3>
+                        <div class="mb-10 text-white">
+                            <span class="text-5xl font-light">R$ 980</span>
+                            <span class="text-xs uppercase tracking-widest text-white/30 block mt-2">mensais</span>
+                        </div>
+                        <ul class="space-y-4 text-sm font-light text-white/70 mb-12 flex-1">
+                            <li>Tudo do ciclo Aurora</li>
+                            <li>1 Sessão Mensal de Laser</li>
+                            <li>Ritual de Boas-vindas VIP</li>
+                            <li>Skincare Customizado</li>
+                        </ul>
+                        <button
+                            class="w-full py-5 bg-rose-gold text-white rounded-full font-display text-[10px] tracking-[0.3em] uppercase hover:bg-white hover:text-deep-aura transition-all">Tornar-se
+                            Membro</button>
+                    </div>
+                    <div
+                        class="glass-panel p-12 rounded-[50px] flex flex-col items-center text-center hover:-translate-y-4 hover:shadow-2xl transition-all duration-500 reveal-right delay-100">
+                        <span class="text-xs tracking-widest uppercase text-slate-400 mb-2">Ciclo III</span>
+                        <h3 class="font-serif text-3xl mb-6">Supreme</h3>
+                        <div class="mb-10">
+                            <span class="text-5xl font-light text-deep-aura">R$ 1.850</span>
+                            <span class="text-xs uppercase tracking-widest text-slate-400 block mt-2">mensais</span>
+                        </div>
+                        <ul class="space-y-4 text-sm font-light text-slate-600 mb-12 flex-1">
+                            <li>Radiance Experience Completo</li>
+                            <li>Prioridade na Agenda Aura</li>
+                            <li>2 Sessões Body Sculpting</li>
+                            <li>Suporte Clínico Exclusivo</li>
+                        </ul>
+                        <button
+                            class="w-full py-4 border border-rose-gold text-rose-gold rounded-full font-display text-[10px] tracking-[0.3em] uppercase hover:bg-rose-gold hover:text-white transition-all">Selecionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-screen-section relative overflow-hidden flex items-center justify-center p-6" id="contato">
+            <div class="absolute inset-0 aura-bg opacity-50"></div>
+            <div class="parallax-blob bg-rose-gold w-full h-full -top-1/2 left-0 blur-[200px] animate-slow-pan"></div>
+            <div class="relative z-10 max-w-4xl text-center reveal-scale delay-100">
+                <h2 class="script-title text-deep-aura mb-8">O convite para o seu novo eu.</h2>
+                <p class="font-serif text-2xl text-slate-600 mb-16 italic font-light">
+                    Agende seu primeiro ritual e permita que sua aura brilhe com toda sua intensidade.
+                </p>
+                <div class="flex flex-col items-center gap-10">
+                    <button
+                        class="bg-deep-aura text-white px-16 py-8 rounded-full font-display text-sm tracking-[0.4em] uppercase hover:bg-rose-gold transition-all shadow-2xl scale-110 hover:scale-125 duration-500">
+                        Reservar Agora
+                    </button>
+                    <div class="flex gap-8 text-deep-aura/60">
+                        <span class="material-symbols-outlined text-3xl animate-float"
+                            style="animation-delay: 0s;">spa</span>
+                        <span class="material-symbols-outlined text-3xl animate-float"
+                            style="animation-delay: 1s;">self_improvement</span>
+                        <span class="material-symbols-outlined text-3xl animate-float"
+                            style="animation-delay: 2s;">flare</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-deep-aura text-white py-20 px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+            <div class="col-span-1 md:col-span-1 reveal delay-100">
+                <div class="flex items-center gap-2 mb-8 group hover:text-rose-gold transition-colors cursor-pointer">
+                    <span
+                        class="material-symbols-outlined text-rose-gold text-2xl group-hover:rotate-180 transition-transform duration-1000">auto_awesome</span>
+                    <h2 class="font-display font-bold text-lg tracking-[0.2em] uppercase">Essence</h2>
+                </div>
+                <p class="text-white/40 font-light text-sm leading-relaxed italic">
+                    Celebrando a beleza como um estado de espírito. Ciência, alma e cuidado em cada toque.
+                </p>
+            </div>
+            <div class="reveal delay-200">
+                <h4 class="text-xs uppercase tracking-[0.3em] text-rose-gold mb-8 font-bold">Rituais</h4>
+                <ul class="space-y-4 text-sm font-light text-white/60">
+                    <li><a class="hover:text-white hover:translate-x-1 inline-block transition-transform" href="#">Aura
+                            Facial</a></li>
+                    <li><a class="hover:text-white hover:translate-x-1 inline-block transition-transform" href="#">Corpo
+                            e Alma</a></li>
+                    <li><a class="hover:text-white hover:translate-x-1 inline-block transition-transform"
+                            href="#">Dermatologia Sacra</a></li>
+                    <li><a class="hover:text-white hover:translate-x-1 inline-block transition-transform"
+                            href="#">Protocolos VIP</a></li>
+                </ul>
+            </div>
+            <div class="reveal delay-300">
+                <h4 class="text-xs uppercase tracking-[0.3em] text-rose-gold mb-8 font-bold">Presença</h4>
+                <ul class="space-y-4 text-sm font-light text-white/60">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-xs">location_on</span>
+                        <span>Barra da Tijuca, Rio de Janeiro</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-xs">call</span>
+                        <span>(21) 99888-7766</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-start md:items-end reveal delay-400">
+                <h4 class="text-xs uppercase tracking-[0.3em] text-rose-gold mb-8 font-bold">Conexão</h4>
+                <div class="flex gap-6">
+                    <a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-rose-gold hover:scale-110 transition-all"
+                        href="#"><span class="material-symbols-outlined text-sm">camera</span></a>
+                    <a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-rose-gold hover:scale-110 transition-all"
+                        href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+                </div>
+            </div>
+        </div>
+        <div
+            class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] text-white/20 reveal delay-500">
+            <p>© 2026 Essence Clinic Rituals. Todos os direitos reservados, criado e desenvolvido por <a
+                    href="reis-automacao-screens.vercel.app">Reis Automação</a></p>
+            <div class="flex gap-8">
+                <a class="hover:text-white transition-colors" href="#">Privacidade</a>
+                <a class="hover:text-white transition-colors" href="#">Termos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-down').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
