@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Patrimonium - Gestão Contábil de Alto Padrão</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --forest: #1a2e26;
+            --cream: #f9f7f2;
+            --bronze: #a67c52;
+            --bronze-light: #c5a07d;
+            --warm-grey: #4a4a4a;
+            --border: #e2d1c3;
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--cream);
+            color: var(--forest);
+        }
+        h1, h2, h3, h4, .serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width: 768px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        .bronze-gradient {
+            background: linear-gradient(135deg, #a67c52 0%, #7d5a3a 100%);
+        }
+        .subtle-border {
+            border: 1px solid var(--border);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Animations & Keyframes */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(166, 124, 82, 0.4); }
+            50% { box-shadow: 0 0 20px 0 rgba(166, 124, 82, 0.7); }
+        }
+        
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+        }
+        
+        .animate-pulse-glow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .delay-100 { transition-delay: 100ms; animation-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; animation-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; animation-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; animation-delay: 400ms; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[var(--border)] px-6 py-5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-12">
+                <a class="text-3xl font-bold tracking-tighter text-[var(--forest)] flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined text-4xl text-[var(--bronze)]">account_balance</span>
+                    <span class="serif-heading uppercase tracking-widest text-xl">Patrimonium</span>
+                </a>
+                <div class="hidden lg:flex gap-8 text-xs font-bold uppercase tracking-widest text-[var(--warm-grey)]">
+                    <a class="hover:text-[var(--bronze)] transition" href="#">Governança</a>
+                    <a class="hover:text-[var(--bronze)] transition" href="#">Planejamento</a>
+                    <a class="hover:text-[var(--bronze)] transition" href="#">Legado</a>
+                    <a class="hover:text-[var(--bronze)] transition" href="#">Privativo</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <a class="text-xs font-bold uppercase tracking-widest text-[var(--forest)] px-4" href="#">Membro</a>
+                <a class="bg-[var(--forest)] text-white text-xs font-bold uppercase tracking-[0.2em] px-8 py-3 rounded-none hover:bg-[var(--bronze)] transition shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--bronze)] focus:ring-offset-2"
+                    href="#">Consultoria Exclusiva</a>
+            </div>
+        </div>
+    </nav>
+    <header class="relative bg-[var(--forest)] text-white overflow-hidden min-h-[85vh] flex items-center">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/linen.png')]">
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 w-full py-20">
+            <div class="two-column-layout gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span
+                        class="inline-block text-[var(--bronze-light)] uppercase tracking-[0.3em] text-xs font-bold mb-6 animate-fade-up">Tradição
+                        &amp; Excelência desde 2010</span>
+                    <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-8 animate-fade-up delay-100">
+                        Protegendo o seu Legado Empresarial.
+                    </h1>
+                    <p
+                        class="text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed font-light max-w-xl animate-fade-up delay-200">
+                        Sua jornada exige uma Parceria Contábil de alto nível. Unimos sofisticação técnica à gestão de
+                        patrimônio para consolidar o futuro da sua corporação.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 animate-fade-up delay-300">
+                        <button
+                            class="bg-[var(--bronze)] text-white font-bold uppercase tracking-widest px-10 py-5 text-sm hover:bg-[var(--bronze-light)] transition shadow-2xl focus:outline-none focus:ring-2 focus:ring-[var(--bronze-light)] focus:ring-offset-2 focus:ring-offset-[var(--forest)] animate-pulse-glow">
+                            Planejamento Sucessório
+                        </button>
+                        <button
+                            class="bg-transparent border border-white/30 text-white font-bold uppercase tracking-widest px-10 py-5 text-sm hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[var(--forest)]">
+                            Nossa História
+                        </button>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center md:justify-end relative">
+                    <div class="relative animate-fade-up delay-200">
+                        <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--bronze)] z-0"></div>
+                        <img alt="Professional Executive"
+                            class="relative z-10 w-full max-w-md grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5q7iKiOOuuMwx82rwgBNVRji6m4jt9IkpHrJ_yjm98vsTmH8H4aFOP_MnAytjZYKHdBZZmHoWSq32RdgcXzRpfCrMMRFhlLJWFrI8Y-R3pkWg4tNPPQ2Tf42lHNQ6e4JhLcgM9fJvVEY1Rqu5SkDVxMHEGPgHg8XtT26MBLa4HVeB4jatZATT6iHDTvE9u-ylbLy1bZxRapfWvlOj_C29ZleNZYeD9p1GtSCEnCf0JNJsE0YpvA5Lb21odX9PI6jTeHVA_lCpmAM" />
+                        <div
+                            class="absolute -bottom-6 -right-6 z-20 bg-[var(--cream)] p-8 shadow-2xl text-[var(--forest)] max-w-xs border border-[var(--border)] animate-fade-up delay-400">
+                            <p class="serif-heading text-2xl font-bold mb-1">Dra. Fátima Reis</p>
+                            <p class="text-xs uppercase tracking-widest text-[var(--bronze)] font-bold">Conselheira
+                                Administrativa</p>
+                            <p class="text-sm italic mt-4 text-[var(--warm-grey)] leading-relaxed">"A confiança é o
+                                alicerce de qualquer império duradouro."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="bg-white py-20 border-b border-[var(--border)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+                <div class="flex flex-col items-center">
+                    <span class="serif-heading text-5xl font-bold text-[var(--forest)] mb-4 italic">13+ Anos</span>
+                    <p class="text-[var(--bronze)] uppercase tracking-[0.2em] text-xs font-bold">De Tradição em
+                        Contabilidade</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="serif-heading text-5xl font-bold text-[var(--forest)] mb-4 italic">50k+</span>
+                    <p class="text-[var(--bronze)] uppercase tracking-[0.2em] text-xs font-bold">Patrimônios Blindados
+                    </p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="serif-heading text-5xl font-bold text-[var(--forest)] mb-4 italic">30k+</span>
+                    <p class="text-[var(--bronze)] uppercase tracking-[0.2em] text-xs font-bold">Sociedades Estruturadas
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-[var(--cream)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-[var(--forest)] mb-6">Serviços Customizados para o
+                        seu Legado.</h2>
+                    <p class="text-[var(--warm-grey)] text-lg leading-relaxed">Expertise técnica e atendimento
+                        consultivo focado na perenidade do seu negócio e na preservação da sua história familiar.</p>
+                </div>
+                <div class="pb-2">
+                    <a class="text-[var(--bronze)] font-bold uppercase tracking-widest text-xs border-b-2 border-[var(--bronze)] pb-2 hover:text-[var(--forest)] hover:border-[var(--forest)] transition focus:outline-none focus:ring-2 focus:ring-[var(--forest)] focus:ring-offset-4"
+                        href="#">Ver Portfólio de Serviços</a>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)]">
+                <div class="bg-white p-12 hover:bg-[var(--cream)] transition group">
+                    <span class="material-symbols-outlined text-4xl text-[var(--bronze)] mb-8">security</span>
+                    <h3 class="serif-heading text-xl font-bold mb-4 group-hover:text-[var(--bronze)] transition">
+                        Governança Fiscal</h3>
+                    <p class="text-[var(--warm-grey)] text-sm leading-relaxed mb-6 font-light">Compliance rigoroso para
+                        garantir a conformidade absoluta da sua corporação perante os órgãos reguladores.</p>
+                </div>
+                <div class="bg-white p-12 hover:bg-[var(--cream)] transition group">
+                    <span class="material-symbols-outlined text-4xl text-[var(--bronze)] mb-8">diversity_3</span>
+                    <h3 class="serif-heading text-xl font-bold mb-4 group-hover:text-[var(--bronze)] transition">
+                        Parceria Estratégica</h3>
+                    <p class="text-[var(--warm-grey)] text-sm leading-relaxed mb-6 font-light">Um conselheiro contábil
+                        dedicado, integrando-se à sua diretoria para decisões fundamentadas em dados.</p>
+                </div>
+                <div class="bg-white p-12 hover:bg-[var(--cream)] transition group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-[var(--bronze)] mb-8">account_balance_wallet</span>
+                    <h3 class="serif-heading text-xl font-bold mb-4 group-hover:text-[var(--bronze)] transition">Gestão
+                        Patrimonial</h3>
+                    <p class="text-[var(--warm-grey)] text-sm leading-relaxed mb-6 font-light">Otimização da carga
+                        tributária e proteção de ativos para sócios e investidores de alta performance.</p>
+                </div>
+                <div class="bg-white p-12 hover:bg-[var(--cream)] transition group">
+                    <span class="material-symbols-outlined text-4xl text-[var(--bronze)] mb-8">history_edu</span>
+                    <h3 class="serif-heading text-xl font-bold mb-4 group-hover:text-[var(--bronze)] transition">
+                        Sucessão Familiar</h3>
+                    <p class="text-[var(--warm-grey)] text-sm leading-relaxed mb-6 font-light">Planejamento jurídico e
+                        contábil focado na transição suave e segura do bastão para a próxima geração.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-white parallax-bg"
+        style="background-image: linear-gradient(rgba(249, 247, 242, 0.95), rgba(249, 247, 242, 0.95)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0Swcqc9OjCuyWyxeF2ARY374QzpR-snxLyd0sO-DkjPrumfSLifh5jUNrD466PaMEPiH-k0e38GbZ7QP4ySPgoYPwBD6AC0DW7wcDCiM4YEL2I81I-wWM4_d-PSDJBaNR1ECtKAfNvQ6m8mtZ0DPSN6ZbsxIQA9YPtEtWbpNeReQQ99erWUQc6dV1pWC3djqGEkCJdFRLqwsnXevMXiIjauY9q37fEsBD-p0QFBPIFPphtxKcV47VoedLmGzD4CraqLB-baeNeww');">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="two-column-layout gap-20 items-center">
+                <div class="bg-[var(--forest)] p-12 lg:p-20 text-white relative scroll-reveal delay-100">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 border-t-4 border-r-4 border-[var(--bronze)] -mr-4 -mt-4 opacity-50">
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-10 leading-tight italic">Nossa Metodologia de
+                        Confiança.</h2>
+                    <div class="space-y-12">
+                        <div class="flex gap-6 scroll-reveal delay-200">
+                            <span class="serif-heading text-3xl text-[var(--bronze)] font-bold italic">01</span>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Diagnóstico de Legado</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Auditoria profunda para entender o
+                                    histórico e as ambições futuras do seu grupo econômico.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 scroll-reveal delay-300">
+                            <span class="serif-heading text-3xl text-[var(--bronze)] font-bold italic">02</span>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Estruturação Jurídico-Contábil</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Implementação de holdings, acordos de
+                                    sócios e regimes fiscais otimizados.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 scroll-reveal delay-400">
+                            <span class="serif-heading text-3xl text-[var(--bronze)] font-bold italic">03</span>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Monitoramento Ativo</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Acompanhamento contínuo através de
+                                    conselhos mensais de performance e risco.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-reveal delay-300">
+                    <span
+                        class="text-[var(--bronze)] uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Consolidação
+                        de Relações</span>
+                    <h2 class="text-4xl font-bold text-[var(--forest)] mb-8 leading-tight">Uma jornada construída sob
+                        medida para grandes líderes.</h2>
+                    <p class="text-[var(--warm-grey)] text-lg leading-relaxed mb-10 font-light">Diferente de soluções de
+                        massa, a Patrimonium opera com um número limitado de clientes por consultor, assegurando que
+                        cada detalhe do seu planejamento sucessório e gestão de patrimônio receba a atenção devida.</p>
+                    <button
+                        class="bg-[var(--forest)] text-white font-bold uppercase tracking-widest px-10 py-5 text-sm hover:bg-[var(--bronze)] transition shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--bronze)] focus:ring-offset-2">Solicitar
+                        Diagnóstico</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-[var(--cream)] border-y border-[var(--border)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold text-[var(--forest)] mb-4">Escolha o seu Nível de Governança.
+                </h2>
+                <p class="text-[var(--warm-grey)] max-w-2xl mx-auto italic">Planos desenhados para a complexidade do seu
+                    ecossistema empresarial.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 border border-[var(--border)] flex flex-col">
+                    <div class="mb-10 text-center">
+                        <span
+                            class="text-xs font-bold uppercase tracking-widest text-[var(--warm-grey)]">Corporativo</span>
+                        <h3 class="serif-heading text-3xl font-bold mt-4">Patrimonial</h3>
+                        <div class="h-px w-12 bg-[var(--bronze)] mx-auto my-6"></div>
+                        <p class="text-sm italic text-gray-500 min-h-[40px]">Para empresas em expansão que buscam
+                            segurança jurídica sólida.</p>
+                    </div>
+                    <div class="mb-10 text-center">
+                        <p class="text-3xl font-bold text-[var(--forest)]">Consulte</p>
+                        <p class="text-xs uppercase text-[var(--bronze)] font-bold mt-1">Valor Sob Consulta</p>
+                    </div>
+                    <ul class="space-y-4 mb-12 text-sm text-[var(--warm-grey)] flex-grow">
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Auditoria Contábil Completa</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Consultoria Fiscal Mensal</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Atendimento VIP Prioritário</li>
+                    </ul>
+                    <button
+                        class="w-full border border-[var(--forest)] text-[var(--forest)] font-bold uppercase tracking-widest py-4 text-xs hover:bg-[var(--forest)] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-[var(--forest)] focus:ring-offset-2">Solicitar
+                        Proposta</button>
+                </div>
+                <div class="bg-[var(--forest)] p-10 shadow-2xl flex flex-col relative transform scale-105 z-10">
+                    <div class="absolute top-0 inset-x-0 h-1 bg-[var(--bronze)]"></div>
+                    <div class="mb-10 text-center text-white">
+                        <span
+                            class="text-xs font-bold uppercase tracking-widest text-[var(--bronze-light)]">Premium</span>
+                        <h3 class="serif-heading text-3xl font-bold mt-4">Legacy</h3>
+                        <div class="h-px w-12 bg-[var(--bronze)] mx-auto my-6"></div>
+                        <p class="text-sm italic text-gray-300 min-h-[40px]">Gestão completa de holdings e planejamento
+                            sucessório estruturado.</p>
+                    </div>
+                    <div class="mb-10 text-center">
+                        <p class="text-3xl font-bold text-white">Privativo</p>
+                        <p class="text-xs uppercase text-[var(--bronze)] font-bold mt-1">Contrato de Longo Prazo</p>
+                    </div>
+                    <ul class="space-y-4 mb-12 text-sm text-gray-300 flex-grow">
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">verified</span> Holding
+                            Familiar &amp; Patrimonial</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">verified</span> Sucessão
+                            e Acordo de Sócios</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">verified</span> Gestão de
+                            Ativos Imobiliários</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">verified</span>
+                            Conselheiro Dedicado 24/7</li>
+                    </ul>
+                    <button
+                        class="w-full bg-[var(--bronze)] text-white font-bold uppercase tracking-widest py-4 text-xs hover:bg-[var(--bronze-light)] transition focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[var(--forest)]">Agendar
+                        Entrevista</button>
+                </div>
+                <div class="bg-white p-10 border border-[var(--border)] flex flex-col">
+                    <div class="mb-10 text-center">
+                        <span class="text-xs font-bold uppercase tracking-widest text-[var(--warm-grey)]">Private</span>
+                        <h3 class="serif-heading text-3xl font-bold mt-4">Infinity</h3>
+                        <div class="h-px w-12 bg-[var(--bronze)] mx-auto my-6"></div>
+                        <p class="text-sm italic text-gray-500 min-h-[40px]">Blindagem internacional e gestão
+                            multifamiliar (Multi-Family Office).</p>
+                    </div>
+                    <div class="mb-10 text-center">
+                        <p class="text-3xl font-bold text-[var(--forest)]">Exclusivo</p>
+                        <p class="text-xs uppercase text-[var(--bronze)] font-bold mt-1">Personalização Total</p>
+                    </div>
+                    <ul class="space-y-4 mb-12 text-sm text-[var(--warm-grey)] flex-grow">
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Planejamento Off-shore</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Consultoria em Fusões e Aquisições</li>
+                        <li class="flex gap-3"><span
+                                class="material-symbols-outlined text-sm text-[var(--bronze)]">check_circle</span>
+                            Relatórios em Padrões IFRS</li>
+                    </ul>
+                    <button
+                        class="w-full border border-[var(--forest)] text-[var(--forest)] font-bold uppercase tracking-widest py-4 text-xs hover:bg-[var(--forest)] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-[var(--forest)] focus:ring-offset-2">Falar
+                        com Diretor</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold text-[var(--forest)] mb-4 italic">A Palavra de Quem Confia.</h2>
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <img alt="Excellence" class="w-24 opacity-60"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Swcqc9OjCuyWyxeF2ARY374QzpR-snxLyd0sO-DkjPrumfSLifh5jUNrD466PaMEPiH-k0e38GbZ7QP4ySPgoYPwBD6AC0DW7wcDCiM4YEL2I81I-wWM4_d-PSDJBaNR1ECtKAfNvQ6m8mtZ0DPSN6ZbsxIQA9YPtEtWbpNeReQQ99erWUQc6dV1pWC3djqGEkCJdFRLqwsnXevMXiIjauY9q37fEsBD-p0QFBPIFPphtxKcV47VoedLmGzD4CraqLB-baeNeww" />
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined text-6xl text-[var(--border)] absolute -top-4 -left-4 opacity-50"
+                        style="transform: scaleX(-1);">format_quote</span>
+                    <div class="relative z-10 pt-10">
+                        <p class="text-lg text-[var(--warm-grey)] italic mb-8 leading-relaxed">"O que define a
+                            Patrimonium é o olhar atento. Eles não entregam apenas números, entregam a tranquilidade de
+                            saber que o patrimônio de três gerações está seguro."</p>
+                        <div class="flex items-center gap-4">
+                            <img alt="Client"
+                                class="w-14 h-14 grayscale hover:grayscale-0 transition-all duration-500 rounded-full border-2 border-[var(--bronze)]"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuRn37CzCvmJY1dnfeEGvukiYGRQkzNnx393APJI3i2QJ2ycNfMFHgnVUtp8Grqlm87zqT-D1VrXKKMVYGW5Hi6G7tc9Fw3l6FcXKZFp5sQkXFvMJcWd4wmoBtSUq1fb6-KYw7YCf9ed76tDBNt3hwyVSGYJ41eYkG8P_hPRJCmG-EYNl9kDXhnEg_engeLcvTlX_-SlNoeZGR5JNGneXrWXdDe5zRoxe8iZXwomnQsgdPkq6xeMunzsjh7om4M3bWZM1aXspi7iM" />
+                            <div>
+                                <p class="font-bold text-[var(--forest)]">Fátima Reis</p>
+                                <p class="text-xs uppercase tracking-widest text-[var(--bronze)] font-bold">CEO Grupo
+                                    Reis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined text-6xl text-[var(--border)] absolute -top-4 -left-4 opacity-50"
+                        style="transform: scaleX(-1);">format_quote</span>
+                    <div class="relative z-10 pt-10">
+                        <p class="text-lg text-[var(--warm-grey)] italic mb-8 leading-relaxed">"A transição da minha
+                            holding para o regime de governança proposto pela equipe foi impecável. Uma parceria
+                            contábil que realmente entende de negócios."</p>
+                        <div class="flex items-center gap-4">
+                            <img alt="Client"
+                                class="w-14 h-14 grayscale hover:grayscale-0 transition-all duration-500 rounded-full border-2 border-[var(--bronze)]"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLWC4599H2jC8_tVUjIN4iK5wBvw7wsrgXtRqU6GADrGWiCdUbogCdebShpGFvhZCIFO0N9YUcmk6JyRsvtPFbN4rUqOo2Hmi2_u0IH4wAvmsPP0ny9eFP03Ol6iUGG-qzcR6cpaV-5P1Tt-QT-Hs84mq3vRpfbPwaOVNgGjXlc6HdddFsqT2j5xGGG20rgnjwddnIyRh74CRQxLIZEjqvZrrnsoiQIl_kOpX3sTxIXIPGVQRjmMCjIvOuJIgtAzvZQJ2Son37co" />
+                            <div>
+                                <p class="font-bold text-[var(--forest)]">Eduardo Toschi</p>
+                                <p class="text-xs uppercase tracking-widest text-[var(--bronze)] font-bold">Investidor
+                                    Imobiliário</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined text-6xl text-[var(--border)] absolute -top-4 -left-4 opacity-50"
+                        style="transform: scaleX(-1);">format_quote</span>
+                    <div class="relative z-10 pt-10">
+                        <p class="text-lg text-[var(--warm-grey)] italic mb-8 leading-relaxed">"Contabilidade de alto
+                            padrão requer discrição e precisão. Encontrei na Patrimonium o suporte ideal para as
+                            complexidades do meu holding group."</p>
+                        <div class="flex items-center gap-4">
+                            <img alt="Client"
+                                class="w-14 h-14 grayscale hover:grayscale-0 transition-all duration-500 rounded-full border-2 border-[var(--bronze)]"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7JJsZ93CM1qIP9AqUpdX-CPxevtSoqEsO0qccNn6nedzX3g7YOQew2xsquUvukehfR_MJRxON3tBAdFHW5xLJofLiR_ix6PFYjL-ikrS6z7XR4YNgz19xAGXp55s1C90TdRg7_XW9sK-O7h-lrZsjsiD-OyV-23IHcE-cTGCDpjs5C4jkk64_utXmHZ2shbbdzcKu5A1js64B70JXa5-BRNJqLoQOp2pz0qrVj9n4gQySxdmcqQ_HqHa_VJlQL92Obcus0wpMdoA" />
+                            <div>
+                                <p class="font-bold text-[var(--forest)]">Matheus Menezes</p>
+                                <p class="text-xs uppercase tracking-widest text-[var(--bronze)] font-bold">Diretor
+                                    Industrial</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-[var(--forest)] text-white">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 italic">Dúvidas Frequentes sobre Governança</h2>
+            <div class="space-y-6">
+                <details class="group border-b border-white/10 pb-6">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer text-xl font-bold hover:text-[var(--bronze)] transition list-none focus:outline-none focus:ring-2 focus:ring-[var(--bronze)] focus:ring-offset-2 focus:ring-offset-[var(--forest)] rounded-sm">
+                        Como a holding patrimonial protege meus ativos?
+                        <span
+                            class="material-symbols-outlined text-[var(--bronze)] group-open:rotate-180 transition">expand_more</span>
+                    </summary>
+                    <div class="mt-6 text-gray-400 leading-relaxed font-light">
+                        A holding atua como uma camada de proteção jurídica e financeira, separando o patrimônio pessoal
+                        dos riscos operacionais das empresas. Além disso, facilita significativamente o processo de
+                        inventário e sucessão, reduzindo custos tributários de forma legal.
+                    </div>
+                </details>
+                <details class="group border-b border-white/10 pb-6">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer text-xl font-bold hover:text-[var(--bronze)] transition list-none focus:outline-none focus:ring-2 focus:ring-[var(--bronze)] focus:ring-offset-2 focus:ring-offset-[var(--forest)] rounded-sm">
+                        Por que investir em planejamento sucessório agora?
+                        <span
+                            class="material-symbols-outlined text-[var(--bronze)] group-open:rotate-180 transition">expand_more</span>
+                    </summary>
+                    <div class="mt-6 text-gray-400 leading-relaxed font-light">
+                        O planejamento sucessório evita conflitos familiares, garante a continuidade do negócio e
+                        permite uma economia tributária de até 70% em relação ao processo de inventário tradicional,
+                        protegendo o legado para as futuras gerações.
+                    </div>
+                </details>
+                <details class="group border-b border-white/10 pb-6">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer text-xl font-bold hover:text-[var(--bronze)] transition list-none focus:outline-none focus:ring-2 focus:ring-[var(--bronze)] focus:ring-offset-2 focus:ring-offset-[var(--forest)] rounded-sm">
+                        Qual o diferencial de uma consultoria privativa?
+                        <span
+                            class="material-symbols-outlined text-[var(--bronze)] group-open:rotate-180 transition">expand_more</span>
+                    </summary>
+                    <div class="mt-6 text-gray-400 leading-relaxed font-light">
+                        A exclusividade. Nossos consultores não apenas "processam guias", eles analisam o contexto
+                        macroeconômico, as necessidades da família e as metas da empresa para oferecer soluções que
+                        softwares automatizados jamais conseguiriam propor.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-white text-[var(--forest)] pt-24 pb-12 border-t border-[var(--border)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+                <div class="col-span-1 md:col-span-1">
+                    <a class="text-3xl font-bold flex items-center gap-3 mb-8" href="#">
+                        <span class="material-symbols-outlined text-4xl text-[var(--bronze)]">account_balance</span>
+                        <span class="serif-heading uppercase tracking-widest text-xl">Patrimonium</span>
+                    </a>
+                    <p class="text-[var(--warm-grey)] text-sm leading-relaxed mb-8 italic">
+                        Referência nacional em contabilidade estratégica e gestão de ativos para grupos familiares e
+                        corporações de alto padrão.
+                    </p>
+                    <div class="flex gap-6">
+                        <a class="text-[var(--warm-grey)] hover:text-[var(--bronze)] transition" href="#"><span
+                                class="material-symbols-outlined">share</span></a>
+                        <a class="text-[var(--warm-grey)] hover:text-[var(--bronze)] transition" href="#"><span
+                                class="material-symbols-outlined">mail</span></a>
+                        <a class="text-[var(--warm-grey)] hover:text-[var(--bronze)] transition" href="#"><span
+                                class="material-symbols-outlined">distance</span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="serif-heading font-bold mb-8 text-lg uppercase tracking-widest text-[var(--bronze)]">
+                        Especialidades</h4>
+                    <ul class="space-y-4 text-[var(--warm-grey)] text-sm font-light">
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Gestão de Holdings</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Planejamento Tributário</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Governança Corporativa</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">M&amp;A Advisory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="serif-heading font-bold mb-8 text-lg uppercase tracking-widest text-[var(--bronze)]">
+                        Institucional</h4>
+                    <ul class="space-y-4 text-[var(--warm-grey)] text-sm font-light">
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Nossa Herança</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Equipe Consultiva</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Publicações Técnicas</a></li>
+                        <li><a class="hover:text-[var(--bronze)] transition" href="#">Escritórios Privativos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="serif-heading font-bold mb-8 text-lg uppercase tracking-widest text-[var(--bronze)]">
+                        Relacionamento</h4>
+                    <div class="text-[var(--warm-grey)] text-sm space-y-6 font-light">
+                        <p class="flex items-center gap-3 font-bold"><span
+                                class="material-symbols-outlined text-sm">call</span> +55 11 0000-0000</p>
+                        <p class="flex items-center gap-3 font-bold"><span
+                                class="material-symbols-outlined text-sm">mail</span> concierge@patrimonium.com.br</p>
+                        <div class="bg-[var(--cream)] p-6 border border-[var(--border)]">
+                            <p class="font-bold text-[var(--forest)] text-xs mb-4 uppercase tracking-widest">
+                                Acreditações de Excelência</p>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-white border border-[var(--border)] flex items-center justify-center grayscale opacity-50">
+                                    <span class="material-symbols-outlined">verified</span>
+                                </div>
+                                <div
+                                    class="w-12 h-12 bg-white border border-[var(--border)] flex items-center justify-center grayscale opacity-50">
+                                    <span class="material-symbols-outlined">award_star</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--warm-grey)]">
+                <p>© 2024 Patrimonium Gestão Contábil de Alto Padrão. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a class="hover:text-[var(--bronze)]" href="#">Termos de Privacidade</a>
+                    <a class="hover:text-[var(--bronze)]" href="#">Código de Ética</a>
+                    <a class="hover:text-[var(--bronze)]" href="#">Governança de Dados</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply scroll-reveal to important elements
+            const elementsToReveal = document.querySelectorAll('section h2, section > div > p, .grid > div, details');
+
+            elementsToReveal.forEach((el) => {
+                if (!el.classList.contains('scroll-reveal')) {
+                    el.classList.add('scroll-reveal');
+                }
+
+                // Add staggered delays for grid items
+                if (el.parentElement.classList.contains('grid')) {
+                    const delay = (Array.from(el.parentElement.children).indexOf(el) % 4) * 100;
+                    if (delay > 0) el.classList.add(`delay-${delay}`);
+                }
+            });
+
+            // Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>

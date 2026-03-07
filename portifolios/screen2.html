@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Executive Concierge | Gestão Contábil de Alto Padrão</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Lato:wght@300;400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0F172A',
+                        charcoal: '#1E293B',
+                        gold: '#D4AF37',
+                        silver: '#C0C0C0',
+                        cream: '#F8F9FA',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --accent-gold: #D4AF37;
+            --deep-navy: #0F172A;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            color: var(--accent-gold);
+        }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+        }
+        .text-balance {
+            text-wrap: balance;
+        }
+        .gold-border {
+            border-image: linear-gradient(to bottom, #D4AF37, #996515) 1;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        .bg-subtle-pattern {
+            background-color: #0F172A;
+            background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+    </style>
+</head>
+
+<body class="font-sans bg-cream text-navy antialiased">
+    <nav class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a class="text-2xl font-serif italic font-bold text-gold tracking-widest flex items-center gap-3" href="#">
+                <span class="material-symbols-outlined text-3xl">account_balance</span>
+                EXECUTIVE
+            </a>
+            <div class="hidden md:flex gap-10 text-xs uppercase tracking-[0.2em] font-bold text-silver/80">
+                <a class="hover:text-gold transition-colors" href="#">Consultoria</a>
+                <a class="hover:text-gold transition-colors" href="#">Privativo</a>
+                <a class="hover:text-gold transition-colors" href="#">Wealth</a>
+                <a class="hover:text-gold transition-colors" href="#">Sobre</a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a class="text-xs uppercase tracking-widest font-bold text-gold border border-gold/40 px-6 py-2 hover:bg-gold hover:text-navy transition-all"
+                    href="#">Acesso Restrito</a>
+            </div>
+        </div>
+    </nav>
+    <header class="relative min-h-[90vh] flex items-center bg-navy overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <canvas id="lux-canvas" class="w-full h-full"></canvas>
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent z-10 pointer-events-none">
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-20 w-full">
+            <div class="asymmetric-grid gap-12 items-center">
+                <div class="pt-20 pb-12">
+                    <span class="text-gold uppercase tracking-[0.4em] text-xs font-bold mb-6 block">Strategic
+                        Partnership</span>
+                    <h1 class="text-5xl md:text-7xl font-serif text-white leading-tight mb-8 italic">
+                        Onde o patrimônio encontra a <span class="text-gold not-italic">estratégia.</span>
+                    </h1>
+                    <p class="text-lg text-silver/70 mb-10 max-w-lg leading-relaxed font-light">
+                        Elevamos a contabilidade ao nível de consultoria executiva. Discreção absoluta e otimização
+                        fiscal para quem valoriza o tempo e a governança de alto padrão.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <button
+                            class="bg-gold text-navy font-bold px-10 py-5 tracking-widest uppercase text-xs hover:bg-white transition-all shadow-2xl">
+                            Solicitar Consultoria
+                        </button>
+                        <button
+                            class="border border-silver/30 text-silver font-bold px-10 py-5 tracking-widest uppercase text-xs hover:border-gold hover:text-gold transition-all">
+                            Wealth Management
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden lg:flex justify-end relative">
+                    <div class="relative p-1 bg-gradient-to-b from-gold/50 to-transparent">
+                        <img alt="Executive Accountant"
+                            class="w-full max-w-md grayscale hover:grayscale-0 transition-all duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5q7iKiOOuuMwx82rwgBNVRji6m4jt9IkpHrJ_yjm98vsTmH8H4aFOP_MnAytjZYKHdBZZmHoWSq32RdgcXzRpfCrMMRFhlLJWFrI8Y-R3pkWg4tNPPQ2Tf42lHNQ6e4JhLcgM9fJvVEY1Rqu5SkDVxMHEGPgHg8XtT26MBLa4HVeB4jatZATT6iHDTvE9u-ylbLy1bZxRapfWvlOj_C29ZleNZYeD9p1GtSCEnCf0JNJsE0YpvA5Lb21odX9PI6jTeHVA_lCpmAM" />
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 bg-navy border border-gold/30 p-8 shadow-2xl max-w-xs">
+                        <p class="text-gold font-serif text-2xl italic mb-1">Legacy First</p>
+                        <p class="text-silver/60 text-xs uppercase tracking-widest">Proteção e Sucessão</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="bg-charcoal py-16 border-y border-gold/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 divide-x divide-gold/20">
+                <div class="text-center md:text-left md:pl-0 animate-on-scroll">
+                    <span class="block text-4xl font-serif text-gold mb-2">13+ Anos</span>
+                    <p class="text-silver/60 uppercase tracking-widest text-[10px] font-bold">Curadoria de Capital</p>
+                </div>
+                <div class="text-center md:text-left md:pl-12 animate-on-scroll delay-100">
+                    <span class="block text-4xl font-serif text-gold mb-2">R$ 15Bi+</span>
+                    <p class="text-silver/60 uppercase tracking-widest text-[10px] font-bold">Patrimônio sob Gestão</p>
+                </div>
+                <div class="text-center md:text-left md:pl-12 animate-on-scroll delay-200">
+                    <span class="block text-4xl font-serif text-gold mb-2">Exclusive</span>
+                    <p class="text-silver/60 uppercase tracking-widest text-[10px] font-bold">Atendimento Private</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 bg-cream overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 animate-on-scroll">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-serif text-navy mb-6">Soluções Customizadas para Ecossistemas
+                        Complexos</h2>
+                    <p class="text-navy/60 leading-relaxed font-light">Não apenas processamos dados; desenhamos
+                        estruturas. Nossa abordagem é centrada na eficiência e na segurança jurídica de longo prazo.</p>
+                </div>
+                <div class="h-[1px] flex-grow bg-gold/30 mx-8 mb-4 hidden lg:block"></div>
+                <span class="text-gold font-serif italic text-xl">Pillars of Excellence</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
+                <div
+                    class="bg-white p-12 border border-gray-100 hover:border-gold transition-colors group animate-on-scroll">
+                    <span
+                        class="material-symbols-outlined text-4xl mb-8 block group-hover:text-gold transition-all duration-300">insights</span>
+                    <h3 class="font-serif text-xl mb-4 italic">Consultoria Estratégica</h3>
+                    <p class="text-navy/70 text-sm leading-relaxed">Planejamento tributário avançado e análise de
+                        viabilidade para expansão de holdings.</p>
+                </div>
+                <div
+                    class="bg-white p-12 border border-gray-100 hover:border-gold transition-colors group animate-on-scroll delay-100">
+                    <span
+                        class="material-symbols-outlined text-4xl mb-8 block group-hover:text-gold transition-all duration-300">encrypted</span>
+                    <h3 class="font-serif text-xl mb-4 italic">Discreção Total</h3>
+                    <p class="text-navy/70 text-sm leading-relaxed">Protocolos rígidos de confidencialidade e canais de
+                        comunicação criptografados.</p>
+                </div>
+                <div
+                    class="bg-white p-12 border border-gray-100 hover:border-gold transition-colors group animate-on-scroll delay-200">
+                    <span
+                        class="material-symbols-outlined text-4xl mb-8 block group-hover:text-gold transition-all duration-300">balance</span>
+                    <h3 class="font-serif text-xl mb-4 italic">Otimização Fiscal</h3>
+                    <p class="text-navy/70 text-sm leading-relaxed">Engenharia tributária ética para maximização da
+                        liquidez e redução de exposição.</p>
+                </div>
+                <div
+                    class="bg-white p-12 border border-gray-100 hover:border-gold transition-colors group animate-on-scroll delay-300">
+                    <span
+                        class="material-symbols-outlined text-4xl mb-8 block group-hover:text-gold transition-all duration-300">star</span>
+                    <h3 class="font-serif text-xl mb-4 italic">Atendimento VIP</h3>
+                    <p class="text-navy/70 text-sm leading-relaxed">Concierge dedicado 24/7 para suporte em decisões
+                        financeiras críticas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 bg-navy text-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                <div class="lg:col-span-4 animate-on-scroll">
+                    <h2 class="text-4xl font-serif italic mb-8">A Jornada do <span class="text-gold">Sucesso</span></h2>
+                    <div class="space-y-12">
+                        <div class="relative pl-12">
+                            <span class="absolute left-0 top-0 text-gold font-serif text-4xl opacity-30">01</span>
+                            <h4 class="text-xl font-serif mb-2">Onboarding Privado</h4>
+                            <p class="text-silver/60 text-sm">Diagnóstico profundo da estrutura atual e definição de
+                                metas de governança.</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <span class="absolute left-0 top-0 text-gold font-serif text-4xl opacity-30">02</span>
+                            <h4 class="text-xl font-serif mb-2">Estruturação</h4>
+                            <p class="text-silver/60 text-sm">Implementação de fluxos inteligentes e blindagem fiscal
+                                preventiva.</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <span class="absolute left-0 top-0 text-gold font-serif text-4xl opacity-30">03</span>
+                            <h4 class="text-xl font-serif mb-2">Expansão de Capital</h4>
+                            <p class="text-silver/60 text-sm">Monitoramento contínuo e suporte estratégico para novas
+                                aquisições.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 animate-on-scroll delay-200">
+                    <div class="aspect-video bg-charcoal relative overflow-hidden">
+                        <img alt="Modern Office" class="w-full h-full object-cover opacity-40 mix-blend-overlay"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Swcqc9OjCuyWyxeF2ARY374QzpR-snxLyd0sO-DkjPrumfSLifh5jUNrD466PaMEPiH-k0e38GbZ7QP4ySPgoYPwBD6AC0DW7wcDCiM4YEL2I81I-wWM4_d-PSDJBaNR1ECtKAfNvQ6m8mtZ0DPSN6ZbsxIQA9YPtEtWbpNeReQQ99erWUQc6dV1pWC3djqGEkCJdFRLqwsnXevMXiIjauY9q37fEsBD-p0QFBPIFPphtxKcV47VoedLmGzD4CraqLB-baeNeww" />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center p-12 border border-gold/20 bg-navy/60 backdrop-blur-sm max-w-lg">
+                                <span class="material-symbols-outlined text-6xl mb-6">workspace_premium</span>
+                                <p class="text-xl font-serif italic text-gold">"O luxo na gestão é a tranquilidade de
+                                    saber que cada centavo está no lugar certo, protegido pela melhor inteligência do
+                                    mercado."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 bg-subtle-pattern">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 animate-on-scroll">
+                <span class="text-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-4 block">Selection</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">Níveis de Parceria</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div
+                    class="bg-charcoal border border-gold/20 p-12 relative group hover:border-gold/60 transition-all cursor-pointer focus-within:ring-1 focus-within:ring-gold focus-within:ring-offset-1 focus-within:ring-offset-navy animate-on-scroll">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span class="material-symbols-outlined text-silver/20 text-4xl">verified</span>
+                    </div>
+                    <h3 class="text-gold font-serif text-3xl italic mb-4">Exclusive</h3>
+                    <p class="text-silver/60 text-sm mb-8">Gestão completa para empresários e profissionais de alto
+                        rendimento.</p>
+                    <div class="mb-8 pb-8 border-b border-white/5">
+                        <span class="text-white text-5xl font-serif">Sob Consulta</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 text-silver/80 text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> Consultoria Tributária Mensal
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> Concierge Contábil Dedicado
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> Planejamento IRPF Customizado
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 border border-gold text-gold uppercase tracking-widest text-xs font-bold hover:bg-gold hover:text-navy transition-all focus:outline-none focus:ring-1 focus:ring-gold focus:ring-offset-1 focus:ring-offset-navy">Selecionar</button>
+                </div>
+                <div
+                    class="bg-navy border-2 border-gold p-12 relative shadow-2xl transform md:-translate-y-4 cursor-pointer focus-within:ring-1 focus-within:ring-gold focus-within:ring-offset-1 focus-within:ring-offset-navy animate-on-scroll delay-200">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-navy px-6 py-1 text-[10px] uppercase font-bold tracking-[0.2em]">
+                        Top Tier</div>
+                    <h3 class="text-gold font-serif text-3xl italic mb-4">Pinnacle</h3>
+                    <p class="text-silver/60 text-sm mb-8">O ápice da governança para holdings familiares e multi-family
+                        offices.</p>
+                    <div class="mb-8 pb-8 border-b border-white/5">
+                        <span class="text-white text-5xl font-serif">Privativo</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 text-silver/80 text-sm">
+                        <li class="flex items-center gap-3 text-gold">
+                            <span class="material-symbols-outlined text-xs">star</span> Wealth &amp; Succession Planning
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> Auditoria Preventiva Constante
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> BPO Financeiro Full-Service
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs">check</span> Board Advisor Mensal
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 bg-gold text-navy uppercase tracking-widest text-xs font-bold hover:bg-white transition-all focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 focus:ring-offset-navy">Agendar
+                        Reunião</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-serif italic mb-8">Vozes da <span class="text-gold">Confiança</span></h2>
+                    <div class="space-y-12">
+                        <blockquote class="relative pl-8 border-l-2 border-gold/30">
+                            <p class="text-xl text-navy/70 font-serif italic mb-4 leading-relaxed">"A transição para o
+                                modelo Executive Concierge mudou minha visão sobre contabilidade. Hoje tenho um parceiro
+                                estratégico, não apenas um fornecedor."</p>
+                            <footer class="flex items-center gap-4">
+                                <img alt="Executive" class="w-12 h-12 rounded-full grayscale"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuRn37CzCvmJY1dnfeEGvukiYGRQkzNnx393APJI3i2QJ2ycNfMFHgnVUtp8Grqlm87zqT-D1VrXKKMVYGW5Hi6G7tc9Fw3l6FcXKZFp5sQkXFvMJcWd4wmoBtSUq1fb6-KYw7YCf9ed76tDBNt3hwyVSGYJ41eYkG8P_hPRJCmG-EYNl9kDXhnEg_engeLcvTlX_-SlNoeZGR5JNGneXrWXdDe5zRoxe8iZXwomnQsgdPkq6xeMunzsjh7om4M3bWZM1aXspi7iM" />
+                                <div>
+                                    <cite
+                                        class="not-italic font-bold text-navy uppercase tracking-widest text-[10px]">Fátima
+                                        Reis</cite>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-tighter">CEO &amp; Investor
+                                    </p>
+                                </div>
+                            </footer>
+                        </blockquote>
+                        <blockquote class="relative pl-8 border-l-2 border-gold/30">
+                            <p class="text-xl text-navy/70 font-serif italic mb-4 leading-relaxed">"O nível de
+                                detalhamento e a proatividade na otimização fiscal são sem precedentes no mercado
+                                brasileiro."</p>
+                            <footer class="flex items-center gap-4">
+                                <img alt="Executive" class="w-12 h-12 rounded-full grayscale"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLWC4599H2jC8_tVUjIN4iK5wBvw7wsrgXtRqU6GADrGWiCdUbogCdebShpGFvhZCIFO0N9YUcmk6JyRsvtPFbN4rUqOo2Hmi2_u0IH4wAvmsPP0ny9eFP03Ol6iUGG-qzcR6cpaV-5P1Tt-QT-Hs84mq3vRpfbPwaOVNgGjXlc6HdddFsqT2j5xGGG20rgnjwddnIyRh74CRQxLIZEjqvZrrnsoiQIl_kOpX3sTxIXIPGVQRjmMCjIvOuJIgtAzvZQJ2Son37co" />
+                                <div>
+                                    <cite
+                                        class="not-italic font-bold text-navy uppercase tracking-widest text-[10px]">Eduardo
+                                        Toschi</cite>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-tighter">Tech Founder</p>
+                                </div>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="relative hidden md:block animate-on-scroll delay-200">
+                    <div class="aspect-[4/5] bg-navy p-2">
+                        <img alt="Success" class="w-full h-full object-cover grayscale opacity-80"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7JJsZ93CM1qIP9AqUpdX-CPxevtSoqEsO0qccNn6nedzX3g7YOQew2xsquUvukehfR_MJRxON3tBAdFHW5xLJofLiR_ix6PFYjL-ikrS6z7XR4YNgz19xAGXp55s1C90TdRg7_XW9sK-O7h-lrZsjsiD-OyV-23IHcE-cTGCDpjs5C4jkk64_utXmHZ2shbbdzcKu5A1js64B70JXa5-BRNJqLoQOp2pz0qrVj9n4gQySxdmcqQ_HqHa_VJlQL92Obcus0wpMdoA" />
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 bg-gold p-12 shadow-2xl">
+                        <span class="text-navy font-serif text-6xl italic">98%</span>
+                        <p class="text-navy/60 uppercase tracking-widest text-[10px] font-bold mt-2">Retention Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 bg-cream">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-4xl font-serif text-center mb-16 italic animate-on-scroll">Questões de Governança</h2>
+            <div class="space-y-6">
+                <details class="group bg-white border border-gray-100 shadow-sm animate-on-scroll">
+                    <summary
+                        class="flex justify-between items-center p-8 cursor-pointer font-serif italic text-xl text-navy focus:outline-none focus:ring-1 focus:ring-navy focus:ring-inset">
+                        Como é garantida a total discreção dos meus dados?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="p-8 pt-0 text-navy/60 leading-relaxed font-light text-sm border-t border-gray-50">
+                        Operamos sob acordos de confidencialidade (NDA) de nível executivo. Nossos sistemas utilizam
+                        criptografia militar e o acesso às suas informações é restrito a um grupo seleto de consultores
+                        sêniores.
+                    </div>
+                </details>
+                <details class="group bg-white border border-gray-100 shadow-sm animate-on-scroll delay-100">
+                    <summary
+                        class="flex justify-between items-center p-8 cursor-pointer font-serif italic text-xl text-navy focus:outline-none focus:ring-1 focus:ring-navy focus:ring-inset">
+                        Qual o diferencial da Consultoria Estratégica?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="p-8 pt-0 text-navy/60 leading-relaxed font-light text-sm border-t border-gray-50">
+                        Diferente da contabilidade tradicional, focamos em cenários futuros. Analisamos tendências
+                        legislativas, otimizamos sua estrutura societária e preparamos seu negócio para eventos de
+                        liquidez ou sucessão.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-navy text-white pt-32 pb-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+                <div class="md:col-span-1">
+                    <a class="text-3xl font-serif italic font-bold text-gold tracking-widest mb-10 block" href="#">
+                        EXECUTIVE
+                    </a>
+                    <p class="text-silver/60 text-xs leading-relaxed uppercase tracking-wider mb-8">
+                        Curadoria contábil e estratégica para o topo da pirâmide empreendedora. Excelência como padrão,
+                        discrição como regra.
+                    </p>
+                    <div class="flex gap-6">
+                        <a class="text-silver/60 hover:text-gold transition-colors" href="#"><span
+                                class="material-symbols-outlined">share</span></a>
+                        <a class="text-silver/60 hover:text-gold transition-colors" href="#"><span
+                                class="material-symbols-outlined">mail</span></a>
+                        <a class="text-silver/60 hover:text-gold transition-colors" href="#"><span
+                                class="material-symbols-outlined">call</span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-8 italic">Serviços Privados</h4>
+                    <ul class="space-y-4 text-silver/60 text-[10px] uppercase tracking-widest font-bold">
+                        <li><a class="hover:text-white transition" href="#">Wealth Planning</a></li>
+                        <li><a class="hover:text-white transition" href="#">Holding Familiar</a></li>
+                        <li><a class="hover:text-white transition" href="#">M&amp;A Advisor</a></li>
+                        <li><a class="hover:text-white transition" href="#">Audit Executive</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-8 italic">The Office</h4>
+                    <ul class="space-y-4 text-silver/60 text-[10px] uppercase tracking-widest font-bold">
+                        <li><a class="hover:text-white transition" href="#">Sobre Nós</a></li>
+                        <li><a class="hover:text-white transition" href="#">Partnership</a></li>
+                        <li><a class="hover:text-white transition" href="#">Insights de Mercado</a></li>
+                        <li><a class="hover:text-white transition" href="#">Contato Private</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-8 italic">Connect</h4>
+                    <div class="text-silver/60 text-xs space-y-4 font-light">
+                        <p>São Paulo | Rio de Janeiro | Lisboa</p>
+                        <p class="text-gold font-bold">0800 900 EXECUTIVE</p>
+                        <div class="bg-white/5 p-6 border border-white/10 mt-6">
+                            <p class="font-serif italic text-white mb-2">Private Access Only</p>
+                            <div class="flex gap-4">
+                                <div class="w-8 h-8 bg-gold/20 rounded-sm"></div>
+                                <div class="w-8 h-8 bg-gold/20 rounded-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="pt-12 border-t border-white/5 flex flex-col md:row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] text-silver/30 font-bold">
+                <p>© 2024 Executive Concierge. All Rights Reserved.</p>
+                <div class="flex gap-10">
+                    <a class="hover:text-gold" href="#">Privacy Policy</a>
+                    <a class="hover:text-gold" href="#">Terms of Engagement</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById('lux-canvas');
+            if (!canvas) return;
+
+            // SCENE, CAMERA, RENDERER
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0F172A, 0.06); // Deep Navy matching background
+
+            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.z = 8;
+
+            // Offset right for asymmetric balance
+            if (window.innerWidth > 1024) {
+                camera.position.x = 2;
+            }
+
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // MAIN OBJECT: Golden Core
+            // Outer Wireframe Core
+            const geometry = new THREE.IcosahedronGeometry(2.2, 1);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xD4AF37, // Gold
+                metalness: 0.8,
+                roughness: 0.2,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.5
+            });
+
+            // Inner Solid Core
+            const coreGeometry = new THREE.IcosahedronGeometry(1.6, 0);
+            const coreMaterial = new THREE.MeshStandardMaterial({
+                color: 0x1E293B, // Charcoal
+                metalness: 0.9,
+                roughness: 0.1
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+
+            const group = new THREE.Group();
+            group.add(mesh);
+            group.add(coreMesh);
+
+            if (window.innerWidth > 1024) {
+                group.position.set(2, 0, 0);
+            } else {
+                group.position.set(0, 0, 0);
+            }
+            scene.add(group);
+
+            // PARTICLES: Golden Dust
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 700;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 25; // wide spread
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.03,
+                color: 0xD4AF37,
+                transparent: true,
+                opacity: 0.5,
+                blending: THREE.AdditiveBlending
+            });
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // LIGHTS
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0xD4AF37, 2.5, 20); // Gold ambient
+            pointLight1.position.set(3, 3, 5);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0x0F172A, 4, 30); // Navy fill
+            pointLight2.position.set(-3, -3, -5);
+            scene.add(pointLight2);
+
+            // MOUSE PARALLAX
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            });
+
+            // RESIZE
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                if (window.innerWidth > 1024) {
+                    camera.position.x = 2;
+                    group.position.set(2, 0, 0);
+                } else {
+                    camera.position.x = 0;
+                    group.position.set(0, 0, 0);
+                }
+            });
+
+            // ANIMATION LOOP
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+
+                // Rotations
+                group.rotation.y = elapsedTime * 0.1;
+                group.rotation.x = elapsedTime * 0.08;
+
+                mesh.rotation.y = -elapsedTime * 0.15;
+                coreMesh.rotation.y = elapsedTime * 0.05;
+
+                particlesMesh.rotation.y = elapsedTime * 0.03;
+
+                // Optional: slow bobbing
+                group.position.y = Math.sin(elapsedTime * 0.5) * 0.2;
+
+                // Mouse parallax easing
+                targetX = mouseX * 0.0005;
+                targetY = mouseY * 0.0005;
+
+                group.rotation.y += 0.05 * (targetX - group.rotation.y);
+                group.rotation.x += 0.05 * (targetY - group.rotation.x);
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            }
+
+            tick();
+        });
+
+        // Intersection Observer for Scroll Animations
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>

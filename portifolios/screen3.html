@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Inteligência Contábil para Líderes - Modern Authority</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Rubik:wght@300;400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b', // Deep Blue-Grey
+                        accent: '#0d9488',  // Subtle Deep Teal
+                        surface: '#f8fafc', // Light slate for background
+                        muted: '#64748b',   // Muted slate for text
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Rubik', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body { @apply font-body bg-white text-primary; }
+            h1, h2, h3, h4 { @apply font-heading tracking-tight; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        /* Animations & Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .delay-100 { transition-delay: 100ms; animation-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; animation-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; animation-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; animation-delay: 400ms; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-12">
+                <a class="text-xl font-extrabold tracking-tighter uppercase flex items-center gap-2" href="#">
+                    <span class="w-2 h-8 bg-accent"></span>
+                    Agilize <span class="text-accent">X</span>
+                </a>
+                <div class="hidden lg:flex gap-8 text-xs font-semibold uppercase tracking-widest text-muted">
+                    <a class="hover:text-accent transition" href="#inteligencia">Inteligência</a>
+                    <a class="hover:text-accent transition" href="#tecnologia">Integração</a>
+                    <a class="hover:text-accent transition" href="#planos">Sistemas</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-8">
+                <a class="text-xs font-bold uppercase tracking-widest hover:text-accent transition" href="#">Portal
+                    CEO</a>
+                <a class="bg-primary text-white text-xs font-bold px-6 py-3 tracking-widest uppercase hover:bg-slate-800 transition"
+                    href="#">Solicitar Proposta</a>
+            </div>
+        </div>
+    </nav>
+    <header class="relative overflow-hidden pt-12 lg:pt-24 pb-20 grid-pattern">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 z-10">
+                <div
+                    class="inline-block bg-accent/10 text-accent text-[10px] font-bold px-3 py-1 mb-6 uppercase tracking-[0.2em] rounded-sm animate-fade-in-up">
+                    Next-Gen Accounting for Enterprise
+                </div>
+                <h1
+                    class="text-5xl lg:text-7xl font-extrabold text-primary mb-8 leading-[1.1] animate-fade-in-up delay-100">
+                    Contabilidade orientada por <span
+                        class="text-accent underline decoration-slate-200 underline-offset-8">dados</span>.
+                </h1>
+                <p class="text-xl text-muted font-light leading-relaxed max-w-2xl mb-12 animate-fade-in-up delay-200">
+                    Arquitetamos ecossistemas contábeis para CEOs que exigem precisão preditiva e conformidade
+                    acelerada. Menos burocracia, mais inteligência estratégica.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-300">
+                    <button
+                        class="bg-primary text-white font-bold px-10 py-5 text-sm uppercase tracking-widest hover:bg-slate-800 transition shadow-2xl shadow-slate-200">
+                        Iniciar Integração
+                    </button>
+                    <button
+                        class="border border-slate-200 text-primary font-bold px-10 py-5 text-sm uppercase tracking-widest hover:bg-slate-50 transition">
+                        Ver Portfólio
+                    </button>
+                </div>
+                <div class="mt-12 flex items-center gap-6 text-muted animate-fade-in-up delay-400">
+                    <div class="flex -space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold">
+                            JD</div>
+                        <div
+                            class="w-10 h-10 rounded-full border-2 border-white bg-slate-300 flex items-center justify-center text-[10px] font-bold">
+                            MK</div>
+                        <div
+                            class="w-10 h-10 rounded-full border-2 border-white bg-slate-400 flex items-center justify-center text-[10px] font-bold">
+                            LS</div>
+                    </div>
+                    <p class="text-xs font-medium uppercase tracking-tight">+5.000 CEOs confiam na nossa infraestrutura
+                    </p>
+                </div>
+            </div>
+            <div class="lg:col-span-5 relative">
+                <div
+                    class="absolute inset-0 bg-accent/5 rounded-full blur-3xl -z-10 transform translate-x-12 translate-y-12">
+                </div>
+                <div class="relative group animate-float">
+                    <img alt="Liderança Executiva"
+                        class="grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover rounded-sm shadow-2xl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5q7iKiOOuuMwx82rwgBNVRji6m4jt9IkpHrJ_yjm98vsTmH8H4aFOP_MnAytjZYKHdBZZmHoWSq32RdgcXzRpfCrMMRFhlLJWFrI8Y-R3pkWg4tNPPQ2Tf42lHNQ6e4JhLcgM9fJvVEY1Rqu5SkDVxMHEGPgHg8XtT26MBLa4HVeB4jatZATT6iHDTvE9u-ylbLy1bZxRapfWvlOj_C29ZleNZYeD9p1GtSCEnCf0JNJsE0YpvA5Lb21odX9PI6jTeHVA_lCpmAM" />
+                    <div
+                        class="absolute -bottom-8 -left-8 glass-card p-6 border border-slate-200 max-w-[240px] animate-fade-in-up delay-400">
+                        <p class="text-xs font-bold uppercase tracking-widest text-accent mb-2">Relatório Mensal</p>
+                        <div class="h-1 w-full bg-slate-100 mb-4 overflow-hidden">
+                            <div class="h-full bg-accent w-3/4"></div>
+                        </div>
+                        <p class="text-[10px] text-slate-600 leading-tight uppercase font-medium">Análise preditiva de
+                            impostos concluída com 99.8% de precisão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="border-y border-slate-100 py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+                <div class="flex flex-col gap-1">
+                    <span class="text-4xl font-extrabold tracking-tighter text-primary">13y+</span>
+                    <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Market Authority</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span class="text-4xl font-extrabold tracking-tighter text-primary">50k+</span>
+                    <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Entrepreneurs</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span class="text-4xl font-extrabold tracking-tighter text-primary">R$ 2B</span>
+                    <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Processed
+                        Capital</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span class="text-4xl font-extrabold tracking-tighter text-primary">0%</span>
+                    <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Compliance Error</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-surface" id="inteligencia">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20">
+                <h2 class="text-3xl font-extrabold mb-4 uppercase tracking-tight">Arquitetura de Serviços</h2>
+                <div class="h-1 w-20 bg-accent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
+                <div class="bg-white p-10 hover:bg-slate-50 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-accent mb-8 group-hover:bg-slate-100 group-hover:text-primary transition-colors duration-300">analytics</span>
+                    <h3 class="text-sm font-bold uppercase tracking-widest mb-4">Inteligência Contábil</h3>
+                    <p class="text-sm text-muted leading-relaxed">Algoritmos avançados para classificação fiscal e
+                        otimização de tributos em tempo real.</p>
+                </div>
+                <div class="bg-white p-10 hover:bg-slate-50 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-accent mb-8 group-hover:bg-slate-100 group-hover:text-primary transition-colors duration-300">query_stats</span>
+                    <h3 class="text-sm font-bold uppercase tracking-widest mb-4">Análise Preditiva</h3>
+                    <p class="text-sm text-muted leading-relaxed">Antecipação de cenários financeiros e fiscais para
+                        suporte à tomada de decisão executiva.</p>
+                </div>
+                <div class="bg-white p-10 hover:bg-slate-50 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-accent mb-8 group-hover:bg-slate-100 group-hover:text-primary transition-colors duration-300">hub</span>
+                    <h3 class="text-sm font-bold uppercase tracking-widest mb-4">Integração Tecnológica</h3>
+                    <p class="text-sm text-muted leading-relaxed">Conexão direta via API com seu ERP, bancos e
+                        plataformas de gestão de alto nível.</p>
+                </div>
+                <div class="bg-white p-10 hover:bg-slate-50 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-accent mb-8 group-hover:bg-slate-100 group-hover:text-primary transition-colors duration-300">verified_user</span>
+                    <h3 class="text-sm font-bold uppercase tracking-widest mb-4">Compliance Acelerado</h3>
+                    <p class="text-sm text-muted leading-relaxed">Segurança jurídica e técnica total, com monitoramento
+                        constante das leis brasileiras.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-white overflow-hidden parallax-bg"
+        style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0Swcqc9OjCuyWyxeF2ARY374QzpR-snxLyd0sO-DkjPrumfSLifh5jUNrD466PaMEPiH-k0e38GbZ7QP4ySPgoYPwBD6AC0DW7wcDCiM4YEL2I81I-wWM4_d-PSDJBaNR1ECtKAfNvQ6m8mtZ0DPSN6ZbsxIQA9YPtEtWbpNeReQQ99erWUQc6dV1pWC3djqGEkCJdFRLqwsnXevMXiIjauY9q37fEsBD-p0QFBPIFPphtxKcV47VoedLmGzD4CraqLB-baeNeww');"
+        id="tecnologia">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl font-extrabold mb-12 tracking-tight">Metodologia de Implantação</h2>
+                    <div class="space-y-12">
+                        <div class="flex gap-8 scroll-reveal delay-100">
+                            <span class="text-4xl font-bold text-slate-200">01</span>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2">Diagnóstico Estrutural</h4>
+                                <p class="text-sm text-muted leading-relaxed">Mapeamento completo do seu regime
+                                    tributário atual e identificação de gargalos de eficiência.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 scroll-reveal delay-200">
+                            <span class="text-4xl font-bold text-slate-200">02</span>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2">Sync de Ecossistema</h4>
+                                <p class="text-sm text-muted leading-relaxed">Configuração da infraestrutura digital e
+                                    integração automática de fluxos de dados.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 scroll-reveal delay-300">
+                            <span class="text-4xl font-bold text-slate-200">03</span>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2">Operação Autônoma</h4>
+                                <p class="text-sm text-muted leading-relaxed">Gestão contínua com dashboards executivos
+                                    e reports de alta frequência.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary p-12 relative scroll-reveal delay-400">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 animate-float"></div>
+                    <h3 class="text-white text-2xl font-bold mb-6 italic leading-relaxed">"A velocidade da nossa escala
+                        exigia um parceiro que não apenas contasse números, mas que antecipasse riscos."</h3>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent rounded-sm"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">C-Level Enterprise</p>
+                            <p class="text-accent text-xs font-medium uppercase tracking-widest">Tech Partner Experience
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-surface" id="planos">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-extrabold mb-4 uppercase tracking-[0.2em]">Sistemas de Gestão</h2>
+                <p class="text-muted text-sm font-medium uppercase tracking-widest">Selecione o nível de autoridade
+                    contábil do seu negócio</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div
+                    class="bg-white p-12 border border-slate-200 flex flex-col group hover:border-accent transition-all cursor-pointer focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-600 mb-8">Base Level</p>
+                    <h3 class="text-2xl font-extrabold mb-4">Growth</h3>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold tracking-tighter">R$ 259</span>
+                        <span class="text-muted text-sm">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Infraestrutura Digital Padrão
+                        </li>
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Compliance Fiscal A1
+                        </li>
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Suporte via Protocolo
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-slate-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">Selecionar</button>
+                </div>
+                <div
+                    class="bg-primary p-12 border border-primary flex flex-col relative transform lg:-translate-y-4 shadow-2xl cursor-pointer hover:-translate-y-5 transition-transform focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-primary">
+                    <div
+                        class="absolute top-0 right-0 bg-accent text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest">
+                        Recommended</div>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-8">Priority Level</p>
+                    <h3 class="text-white text-2xl font-extrabold mb-4">Enterprise</h3>
+                    <div class="mb-8 text-white">
+                        <span class="text-4xl font-extrabold tracking-tighter">R$ 450</span>
+                        <span class="text-slate-400 text-sm">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="text-xs text-slate-300 flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">verified</span>
+                            Gerente de Conta Exclusivo (CFO Level)
+                        </li>
+                        <li class="text-xs text-slate-300 flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">verified</span>
+                            Análise de Cenário Trimestral
+                        </li>
+                        <li class="text-xs text-slate-300 flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">verified</span>
+                            Integração Total de Notas (Auto-Sync)
+                        </li>
+                        <li class="text-xs text-slate-300 flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">verified</span>
+                            Tax Planning Estratégico
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 text-xs font-bold uppercase tracking-widest bg-accent text-white hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">Ativar
+                        Unidade</button>
+                </div>
+                <div
+                    class="bg-white p-12 border border-slate-200 flex flex-col group hover:border-accent transition-all cursor-pointer focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-600 mb-8">Max Level</p>
+                    <h3 class="text-2xl font-extrabold mb-4">Prime Plus</h3>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold tracking-tighter">R$ 700</span>
+                        <span class="text-muted text-sm">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            BPO Financeiro Integrado
+                        </li>
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Relatórios Customizados (BI)
+                        </li>
+                        <li class="text-xs text-muted flex items-center gap-2 font-medium">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            SLA de Resposta &lt; 2h
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-slate-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">Selecionar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="flex flex-col">
+                    <div class="flex gap-1 mb-6 text-accent">
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                    </div>
+                    <p class="text-sm italic text-muted leading-relaxed mb-8">"O nível de detalhamento técnico da equipe
+                        Agilize é o que nos dá segurança para focar na expansão global da nossa marca."</p>
+                    <div class="flex items-center gap-4">
+                        <img alt="Executive" class="w-10 h-10 rounded-full grayscale"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuRn37CzCvmJY1dnfeEGvukiYGRQkzNnx393APJI3i2QJ2ycNfMFHgnVUtp8Grqlm87zqT-D1VrXKKMVYGW5Hi6G7tc9Fw3l6FcXKZFp5sQkXFvMJcWd4wmoBtSUq1fb6-KYw7YCf9ed76tDBNt3hwyVSGYJ41eYkG8P_hPRJCmG-EYNl9kDXhnEg_engeLcvTlX_-SlNoeZGR5JNGneXrWXdDe5zRoxe8iZXwomnQsgdPkq6xeMunzsjh7om4M3bWZM1aXspi7iM" />
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-tight">Fátima Reis</p>
+                            <p class="text-[10px] text-slate-600 font-medium uppercase tracking-widest">Founder &amp;
+                                CEO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex gap-1 mb-6 text-accent">
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                    </div>
+                    <p class="text-sm italic text-muted leading-relaxed mb-8">"Eficiência absoluta. A integração com
+                        nossos sistemas internos foi feita em tempo recorde, sem interrupções operacionais."</p>
+                    <div class="flex items-center gap-4">
+                        <img alt="Executive" class="w-10 h-10 rounded-full grayscale"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLWC4599H2jC8_tVUjIN4iK5wBvw7wsrgXtRqU6GADrGWiCdUbogCdebShpGFvhZCIFO0N9YUcmk6JyRsvtPFbN4rUqOo2Hmi2_u0IH4wAvmsPP0ny9eFP03Ol6iUGG-qzcR6cpaV-5P1Tt-QT-Hs84mq3vRpfbPwaOVNgGjXlc6HdddFsqT2j5xGGG20rgnjwddnIyRh74CRQxLIZEjqvZrrnsoiQIl_kOpX3sTxIXIPGVQRjmMCjIvOuJIgtAzvZQJ2Son37co" />
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-tight">Eduardo Toschi</p>
+                            <p class="text-[10px] text-slate-600 font-medium uppercase tracking-widest">CTO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex gap-1 mb-6 text-accent">
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                        <span class="material-symbols-outlined text-sm">star</span>
+                    </div>
+                    <p class="text-sm italic text-muted leading-relaxed mb-8">"Diferente de tudo que já vimos no mercado
+                        contábil tradicional. Inteligência de dados aplicada de forma prática e estratégica."</p>
+                    <div class="flex items-center gap-4">
+                        <img alt="Executive" class="w-10 h-10 rounded-full grayscale"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7JJsZ93CM1qIP9AqUpdX-CPxevtSoqEsO0qccNn6nedzX3g7YOQew2xsquUvukehfR_MJRxON3tBAdFHW5xLJofLiR_ix6PFYjL-ikrS6z7XR4YNgz19xAGXp55s1C90TdRg7_XW9sK-O7h-lrZsjsiD-OyV-23IHcE-cTGCDpjs5C4jkk64_utXmHZ2shbbdzcKu5A1js64B70JXa5-BRNJqLoQOp2pz0qrVj9n4gQySxdmcqQ_HqHa_VJlQL92Obcus0wpMdoA" />
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-tight">Matheus Menezes</p>
+                            <p class="text-[10px] text-slate-600 font-medium uppercase tracking-widest">Serial
+                                Entrepreneur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-12 text-center tracking-tight">Dúvidas Técnicas</h2>
+            <div class="space-y-6">
+                <details class="group bg-white border border-slate-200" open="">
+                    <summary
+                        class="flex justify-between items-center p-8 cursor-pointer font-bold text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-accent focus:ring-inset">
+                        Como funciona a arquitetura online?
+                        <span
+                            class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-8 pb-8 text-sm text-muted leading-relaxed">
+                        Utilizamos uma infraestrutura de nuvem híbrida com criptografia militar para garantir que todos
+                        os dados fiscais e financeiros sejam processados com latência zero e segurança absoluta.
+                    </div>
+                </details>
+                <details class="group bg-white border border-slate-200">
+                    <summary
+                        class="flex justify-between items-center p-8 cursor-pointer font-bold text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-accent focus:ring-inset">
+                        Há garantias de compliance?
+                        <span
+                            class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-8 pb-8 text-sm text-muted leading-relaxed">
+                        Sim. Oferecemos seguro de responsabilidade civil e técnica, além de auditorias constantes em
+                        nossos processos internos para garantir conformidade total com as normas do CFC e Receita
+                        Federal.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-primary text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+                <div class="col-span-1 md:col-span-1">
+                    <a class="text-2xl font-extrabold tracking-tighter mb-8 block uppercase" href="#">
+                        Agilize <span class="text-accent">X</span>
+                    </a>
+                    <p class="text-slate-400 text-xs leading-relaxed uppercase font-medium tracking-widest mb-8">
+                        Defining the next era of accounting intelligence. Authority in data-driven growth.
+                    </p>
+                    <div class="flex gap-6">
+                        <a class="text-slate-400 hover:text-accent transition" href="#"><span
+                                class="material-symbols-outlined">share</span></a>
+                        <a class="text-slate-400 hover:text-accent transition" href="#"><span
+                                class="material-symbols-outlined">monitoring</span></a>
+                        <a class="text-slate-400 hover:text-accent transition" href="#"><span
+                                class="material-symbols-outlined">language</span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-8">Capabilities</h4>
+                    <ul class="space-y-4 text-[11px] font-medium uppercase tracking-widest text-slate-400">
+                        <li><a class="hover:text-white transition" href="#">Formação Societária</a></li>
+                        <li><a class="hover:text-white transition" href="#">Migração Estrutural</a></li>
+                        <li><a class="hover:text-white transition" href="#">BPO Enterprise</a></li>
+                        <li><a class="hover:text-white transition" href="#">Tax Compliance</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-8">Authority</h4>
+                    <ul class="space-y-4 text-[11px] font-medium uppercase tracking-widest text-slate-400">
+                        <li><a class="hover:text-white transition" href="#">Network</a></li>
+                        <li><a class="hover:text-white transition" href="#">Case Studies</a></li>
+                        <li><a class="hover:text-white transition" href="#">Intelligence Blog</a></li>
+                        <li><a class="hover:text-white transition" href="#">Governance</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-8">Corporate Support</h4>
+                    <div class="text-[11px] font-medium uppercase tracking-widest text-slate-400 space-y-4">
+                        <p>0800 500 0000</p>
+                        <p>board@agilizex.com.br</p>
+                        <div class="mt-8 border border-slate-800 p-4">
+                            <p class="text-[9px] text-slate-500 mb-2">Technical Certifications</p>
+                            <div class="flex gap-4 opacity-50 grayscale">
+                                <div class="w-8 h-8 bg-slate-700"></div>
+                                <div class="w-8 h-8 bg-slate-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">© 2024 AGILIZE X. ALL RIGHTS
+                    RESERVED.</p>
+                <div class="flex gap-10 text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+                    <a class="hover:text-white" href="#">Privacy</a>
+                    <a class="hover:text-white" href="#">Legal Terms</a>
+                    <a class="hover:text-white" href="#">API Docs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply scroll-reveal to important elements
+            const elementsToReveal = document.querySelectorAll('section h2, section > div > p, .grid > div, details');
+
+            elementsToReveal.forEach((el) => {
+                if (!el.classList.contains('scroll-reveal')) {
+                    el.classList.add('scroll-reveal');
+                }
+
+                // Add staggered delays for grid items
+                if (el.parentElement.classList.contains('grid')) {
+                    const delay = (Array.from(el.parentElement.children).indexOf(el) % 4) * 100;
+                    if (delay > 0) el.classList.add(`delay-${delay}`);
+                }
+            });
+
+            // Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>
